@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="David, Reyes, Columbia University, Mechanical Engineering, Robotics">
+    <meta name="description" content="David Reyes's Portfolio Website">
+    <meta name="author" content="David Reyes">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <title>Control Systems | David Reyes</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+                <span class="brand-icon">DR</span>
+                <span class="brand-name">David Reyes</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Projects</a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="../projects/bipedal.html">Bipedal Walker</a></li>
+                            <li><a class="dropdown-item" href="../projects/aircraft.html">Aircraft Design</a></li>
+                            <li><a class="dropdown-item" href="../projects/digestor.html">Cow Digestor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Relevant Coursework</a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="../coursework/labview.html">Data Acquisition</a></li>
+                            <li><a class="dropdown-item" href="../coursework/designlab.html">Manufacturing Lab</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <h1 class="text-center mb-5" data-aos="zoom-in-up">
+            Dynamics and Control System Design Lab
+        </h1>
+
+        <!-- Overview -->
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                        <h2 class="fw-bold mb-3">Overview</h2>
+                        <p class="lead text-muted">
+                            The Dynamics and Control System Design Laboratory (EML 4314C) course at the University of Florida provided hands-on experience in designing and implementing control systems for dynamic mechanical systems. It involved a combination of modeling, system identification, and control system design using both classical and modern techniques. Key tools like LabVIEW and MATLAB were extensively employed to develop automated systems and analyze experimental data.
+                        </p>
+                        <h3 class="fw-bold mb-3">Key Skills</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>LabVIEW Programming:</strong> Real-time data acquisition, signal processing, control system implementation.</li>
+                            <li><strong>System Identification & Control:</strong> Modeled SISO and MIMO systems.</li>
+                            <li><strong>Data Analysis & Automation:</strong> Automated logging, signal processing, feedback control.</li>
+                            <li><strong>Control System Design:</strong> Implemented state-space and classical control methods.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5 bg-light py-5 rounded shadow-sm">
+            <div class="container">
+                <h2 class="fw-bold text-center mb-4" data-aos="fade-up">Lab Reports</h2>
+                <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="100">
+                    A collection of selected experiments and control system designs from the course.
+                </p>
+                <div class="row gy-4" id="papers-row">
+                    <div class="col-lg-4 col-md-6 paper-card">
+                        <div class="card h-100 shadow-sm" data-aos="fade-up">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Motor Flywheel System</h5>
+                                <p class="small text-muted">Transfer Function & Frequency Response Analysis</p>
+                                <p>Derived transfer functions using step and sinusoidal inputs, analyzed Bode plots, and validated models with MATLAB.</p>
+                                <p class="small"><strong>Skills:</strong> Data acquisition, Bode plot analysis, transfer function derivation</p>
+                                <div class="d-flex gap-2 mb-3 btn-small-group">
+                                    <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf1">
+                                        <i class="fas fa-expand me-1"></i> View Larger
+                                    </button>
+                                    <a href="/documents/Group18_Lab1.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Motor Flywheel System PDF in new window">
+                                        <i class="fas fa-up-right-from-square"></i> Open New Window
+                                    </a>
+                                </div>
+                                <div class="pdf-wrapper mx-auto" id="pdf1">
+                                    <iframe 
+                                    src="/documents/Group18_Lab1.pdf" 
+                                    title="Motor Flywheel System PDF"
+                                    width="100%" 
+                                    height="300" 
+                                    style="border: none;"
+                                    loading="lazy"
+                                    >
+                                    </iframe>
+                                    <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                        <i class="fas fa-times"></i> Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 paper-card">
+                        <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Controller Design in Motor Systems</h5>
+                                <p class="small text-muted">Error Minimization & Performance Comparison</p>
+                                <p>Implemented bang-bang, PID, and full-state feedback controllers, optimizing PID tuning and analyzing performance trade-offs.</p>
+                                <p class="small"><strong>Skills:</strong> PID tuning, full-state feedback, performance comparison</p>
+                                <div class="d-flex gap-2 mb-3 btn-small-group">
+                                    <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf2">
+                                        <i class="fas fa-expand me-1"></i> View Larger
+                                    </button>
+                                    <a href="/documents/Group28_Lab2.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Controller Design PDF in new window">
+                                        <i class="fas fa-up-right-from-square"></i> Open New Window
+                                    </a>
+                                </div>
+                                <div class="pdf-wrapper mx-auto" id="pdf2">
+                                    <iframe 
+                                    src="/documents/Group28_Lab2.pdf" 
+                                    title="Controller Design in Motor Systems PDF"
+                                    width="100%" 
+                                    height="300" 
+                                    style="border: none;"
+                                    loading="lazy"
+                                    >
+                                    </iframe>
+                                    <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                        <i class="fas fa-times"></i> Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 paper-card">
+                        <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Furuta Pendulum Control</h5>
+                                <p class="small text-muted">Full-State Feedback & LQR Optimization</p>
+                                <p>Compared manual tuning with LQR for optimal pendulum control, evaluating RMS values for precision and stability.</p>
+                                <p class="small"><strong>Skills:</strong> Linear Quadratic Regulator (LQR) control, manual tuning, MATLAB simulation</p>
+                                <div class="d-flex gap-2 mb-3 btn-small-group">
+                                    <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf3">
+                                        <i class="fas fa-expand me-1"></i> View Larger
+                                    </button>
+                                    <a href="/documents/Group28_Lab4.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Furuta Pendulum Control PDF in new window">
+                                        <i class="fas fa-up-right-from-square"></i> Open New Window
+                                    </a>
+                                </div>
+                                <div class="pdf-wrapper mx-auto" id="pdf3">
+                                    <iframe 
+                                    src="/documents/Group28_Lab4.pdf" 
+                                    title="Furuta Pendulum Control PDF"
+                                    width="100%" 
+                                    height="300" 
+                                    style="border: none;"
+                                    loading="lazy"
+                                    >
+                                    </iframe>
+                                    <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                        <i class="fas fa-times"></i> Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="pdf-overlay" class="pdf-overlay d-none" aria-hidden="true" role="dialog" aria-modal="true">
+            <div class="pdf-overlay-content">
+                <div class="pdf-container">
+                    <button id="pdf-overlay-close" class="btn btn-danger btn-close-pdf" aria-label="Close PDF">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <iframe id="pdf-overlay-iframe" src="" frameborder="0" loading="lazy" title="Expanded PDF"></iframe>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer class="modern-footer text-center">
+        <div class="container">
+            <h5 class="footer-title mb-4">Get in Touch</h5>
+
+            <p class="mb-2">
+            <i class="fas fa-envelope me-2"></i>
+            <a href="mailto:d.reyes@columbia.edu">d.reyes@columbia.edu</a>
+            </p>
+            <p class="mb-4">
+            <i class="fas fa-phone me-2"></i>
+            <a href="tel:+17866750086">(786) 675-0086</a>
+            </p>
+
+            <h5 class="footer-title mb-3">Follow Me</h5>
+            <div class="social-icons d-flex justify-content-center gap-3 mb-4">
+            <a href="https://github.com/davidereyes2002" target="_blank" class="icon-btn" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/david-reyes-gua/" target="_blank" class="icon-btn" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            </div>
+
+            <div class="footer-copy mt-1">
+                &copy; 2025 David Reyes. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", () => {
+        initAOS();
+        initPDFOverlay();
+        initDropdowns();
+    });
+
+    function initAOS() {
+        AOS.init();
+        document.body.classList.add("loaded");
+    }
+
+    function initPDFOverlay() {
+        const overlay = document.getElementById('pdf-overlay');
+        const container = overlay.querySelector('.pdf-container');
+        const overlayIframe = document.getElementById('pdf-overlay-iframe');
+        const overlayCloseBtn = document.getElementById('pdf-overlay-close');
+
+        let currentPreviewRect = null; // store bounding rect of preview iframe on open
+
+        function setContainerRect(rect) {
+            container.style.top = rect.top + 'px';
+            container.style.left = rect.left + 'px';
+            container.style.width = rect.width + 'px';
+            container.style.height = rect.height + 'px';
+            container.style.borderRadius = '8px';
+        }
+
+        document.querySelectorAll('.btn-expand-pdf').forEach(button => {
+            button.addEventListener('click', () => {
+            const cardBody = button.closest('.card-body');
+            const iframe = cardBody.querySelector('iframe');
+            const rect = iframe.getBoundingClientRect();
+
+            currentPreviewRect = rect;
+
+            // Set iframe src in overlay
+            overlayIframe.src = iframe.src;
+
+            // Show overlay (remove d-none, add show)
+            overlay.classList.remove('d-none');
+            overlay.classList.add('show');
+            overlay.setAttribute('aria-hidden', 'false');
+
+            // Disable background scroll
+            document.body.style.overflow = 'hidden';
+
+            // Start container at preview iframe size and position
+            setContainerRect(rect);
+
+            // Trigger reflow then animate to full screen (centered, 90vw x 90vh)
+            requestAnimationFrame(() => {
+                container.style.top = `50%`;
+                container.style.left = `50%`;
+                container.style.width = `90vw`;
+                container.style.height = `90vh`;
+                container.style.borderRadius = '8px';
+                container.style.transform = 'translate(-50%, -50%)';
+            });
+            });
+        });
+
+        function closeOverlay() {
+            // Start close animation: scale down & fade container, fade overlay background
+            container.classList.add('closing');
+            overlay.classList.remove('show'); // fade overlay background opacity
+
+            overlay.setAttribute('aria-hidden', 'true');
+
+            // After animation duration (match CSS 400ms), hide and reset
+            setTimeout(() => {
+                overlay.classList.add('d-none');
+                overlayIframe.src = '';
+                document.body.style.overflow = '';
+                currentPreviewRect = null;
+
+                // Reset container styles for next open
+                container.classList.remove('closing');
+                container.style.transform = 'none';
+                container.style.top = '';
+                container.style.left = '';
+                container.style.width = '';
+                container.style.height = '';
+                container.style.borderRadius = '';
+            }, 400);
+        }
+
+        overlayCloseBtn.addEventListener('click', closeOverlay);
+
+        // Close on clicking outside container
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+
+        // Close on Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) {
+            closeOverlay();
+            }
+        });
+    }
+
+    function initDropdowns() {
+        const dropdowns = document.querySelectorAll(".nav-item.dropdown");
+
+        dropdowns.forEach((dropdown) => {
+            const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+            const menu = dropdown.querySelector(".dropdown-menu");
+
+            // Show on hover
+            dropdown.addEventListener("mouseenter", () => {
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                bsDropdown.show();
+            });
+
+            // Hide on mouse leave
+            dropdown.addEventListener("mouseleave", () => {
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                bsDropdown.hide();
+            });
+
+            // Also allow click toggle (Bootstrap default)
+            toggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                if (menu.classList.contains("show")) {
+                    bsDropdown.hide();
+                } else {
+                    bsDropdown.show();
+                }
+            });
+        });
+    }
+    </script>
+</body>
+</html>

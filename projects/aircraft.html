@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="David, Reyes, Columbia University, Mechanical Engineering, Robotics">
+    <meta name="description" content="David Reyes's Portfolio Website">
+    <meta name="author" content="David Reyes">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <title>Aircraft Design | David Reyes</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+                <span class="brand-icon">DR</span>
+                <span class="brand-name">David Reyes</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Projects</a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="../projects/bipedal.html">Bipedal Walker</a></li>
+                            <li><a class="dropdown-item" href="../projects/aircraft.html">Aircraft Design</a></li>
+                            <li><a class="dropdown-item" href="../projects/digestor.html">Cow Digestor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Relevant Coursework</a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="../coursework/labview.html">Data Acquisition</a></li>
+                            <li><a class="dropdown-item" href="../coursework/designlab.html">Manufacturing Lab</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <h1 class="text-center mb-5" data-aos="fade-up">Aircraft Design</h1>
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-10 mx-auto">
+                    <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                        <h2 class="fw-bold mb-3">Project Overview</h2>
+                        <p class="lead text-muted">
+                            The Aircraft Design Project aimed to create a functional radio-controlled aircraft that could fit within specific design constraints. The aircraft had to fit within an 8 ft cube and weigh less than 55 lbs. The primary goal was to ensure the aircraft could complete three laps of an 8900 feet course in under 5 minutes without sustaining significant damage.
+                        </p>
+                        <p class="lead text-muted">
+                            Additionally, the aircraft was designed for search and surveillance capabilities, prioritizing stability over speed. The entire design was intended to be 3D printed to allow for quick remanufacture if necessary.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5 bg-light py-5 rounded shadow-sm">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7">
+                        <h2 class="fw-bold mb-4" data-aos="fade-up">CAD & 3D Modeling</h2>
+                        <p class="text-muted mb-4" data-aos="fade-up" data-aos-delay="100">
+                            Our CAD and 3D modeling efforts transformed initial concepts into a detailed, high-performance aircraft design. 
+                            Through iterative refinement, and collaborative problem-solving, we ensured every detail 
+                            met both structural and aerodynamic requirements.
+                        </p>
+                        <ul class="list-unstyled text-muted" data-aos="fade-up" data-aos-delay="200" style="line-height: 1.8;">
+                            <li>Built conceptual models to visualize the complete aircraft structure.</li>
+                            <li>Iteratively refined designs based on simulation results and peer feedback.</li>
+                            <li>Maintained strict dimensional accuracy and tolerances.</li>
+                            <li>Incorporated aerodynamic enhancements for optimal performance.</li>
+                            <li>Integrated subsystems seamlessly through cross-team collaboration.</li>
+                            <li>Used advanced CAD tools for structural and aerodynamic simulations.</li>
+                            <li>Documented every stage from early sketches to final specifications.</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 text-center" data-aos="fade-left">
+                        <div style="border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <img src="../images/top_view_overall_assembly.JPG" alt="3D CAD model of aircraft" class="img-fluid">
+                        </div>
+                        <small class="text-muted d-block mt-2">Top view of the finalized CAD aircraft assembly</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-3" data-aos="fade-up">Wing Design</h2>
+                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                        The wings were designed using a semi-symmetrical airfoil (NACA 2412), ideal for subsonic flight. The wings featured a trapezoidal shape with a lattice interior structure for increased structural integrity.
+                    </p>
+                    <p class="text-muted" data-aos="fade-up" data-aos-delay="200">
+                        Unique integration of an X-shaped lattice, combining ribs and spars into one unified structure. The structure was optimized to minimize weight while also conserving high rigidity. Control surfaces such as ailerons were included, with dimensions and positions optimized for maximum rolling moment and stability.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center" data-aos="zoom-in">
+                    <div class="carousel" data-id="carousel1">
+                        <div class="carousel-container rounded shadow aspect-16-9">
+                            <img src="../images/wing-iteration1.png" class="carousel-img active" alt="Wing first design">
+                            <img src="../images/wing-iteration-final.png" class="carousel-img" alt="Wing final design">
+
+                            <button class="carousel-btn prev-btn" data-target="carousel1">&#10094;</button>
+                            <button class="carousel-btn next-btn" data-target="carousel1">&#10095;</button>
+                        </div>
+                        <p class="text-muted mt-2 small text-center">First and final wing design iteration</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5 bg-light py-5 rounded shadow-sm">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h2 class="fw-bold mb-3" data-aos="fade-up">Tail Design</h2>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                            The tail configuration chosen was conventional, using a NACA0012 airfoil for the horizontal tail and a NACA0009 airfoil for the vertical tail.
+                        </p>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="200">
+                            The horizontal and vertical tails were sized for optimal stability and control, with control surfaces (elevator and rudder) designed for effective maneuvering. The design makes use of a tail-wheel-rudder spring mechanism that translates rudder deflection into tail-wheel steering, minimizing the use of electronic components.
+                        </p>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="300">
+                            Continued use of X-shaped lattice within vertical tail, horizontal tail, and control surfaces.
+                        </p>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="400">
+                            The decision to choose between an elliptical stabilizer and a trapezoidal stabilizer was crucial, with considerations for aerodynamic efficiency and manufacturing simplicity. As demonstrated in the adjacent images, each design offers unique advantages: the elliptical stabilizer reduces drag and provides smooth lift distribution, while the trapezoidal stabilizer offers cost-effectiveness and structural efficiency.
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 text-center" data-aos="zoom-in">
+                        <div class="carousel" data-id="carousel2">
+                            <div class="carousel-container rounded shadow aspect-1-1">
+                                <img src="../images/tail-elliptical.jpg" class="carousel-img active" alt="Elliptical horizontal tail">
+                                <img src="../images/tail-trapezoidal.JPG" class="carousel-img" alt="Trapezoidal horizontal tail">
+
+                                <button class="carousel-btn prev-btn" data-target="carousel2">&#10094;</button>
+                                <button class="carousel-btn next-btn" data-target="carousel2">&#10095;</button>
+                            </div>
+                        </div>
+                        <p class="text-muted mt-2 small text-center">Tail assemblies utilizing an elliptical and a trapezoidal horizontal tail</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5">
+            <h2 class="fw-bold mb-3" data-aos="fade-up">Fuselage Design</h2>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                The fuselage served as the central structure, connecting the wings and tail while housing the propulsion system.
+                Initially designed as a double-walled structure, it was later modified to a single-walled structure to reduce weight.<br><br>
+                The fuselage included internal ribs for added structural support and accommodations for servos, servo wires, and attachment points. Additionally, the fuselage served to house the battery, receiver, and electronic speed controllers (ESCs) efficiently.<br><br>
+                The design made aerodynamic considerations, which led to the shape of the fuselage minimizing drag and enhancing airflow, contributing to the overall aerodynamic efficiency of the structure.
+                Engineered to evenly distribute loads during flight to maintain balance and stability.
+            </p>
+            <div class="row text-center mt-4">
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="zoom-in">
+                    <img src="../images/fuselage1.png" alt="Front end of fuselage" class="img-fluid rounded shadow">
+                    <p class="text-muted mt-2 small">Front end of fuselage showcasing reinforced nose for housing of propulsion motor, battery, receiver, and ESC.</p>
+                </div>
+
+                <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="carousel" data-id="carousel3">
+                        <div class="carousel-container rounded shadow aspect-4-3">
+                            <img src="../images/fuselage2.JPG" class="carousel-img active" alt="Final design iteration">
+                            <img src="../images/fuselage3.JPG" class="carousel-img" alt="Alternate fuselage view">
+
+                            <button class="carousel-btn prev-btn" data-target="carousel3">&#10094;</button>
+                            <button class="carousel-btn next-btn" data-target="carousel3">&#10095;</button>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-2 small text-center">Final design iteration of the fuselage assembly</p>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5 bg-light py-5 rounded shadow-sm">
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col-md-6">
+                        <h2 class="fw-bold mb-3" data-aos="fade-up">Manufacturing Process</h2>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                            Out of my team, I was in charge of the manufacturing process, which involved overseeing the 3D printing of all major components of the aircraft. This approach allowed for precise control over the design and facilitated quick adjustments and remanufacture if needed. Key steps in the manufacturing process included:
+                        </p>
+
+                        <h5 class="fw-semibold mt-4" data-aos="fade-up" data-aos-delay="200">3D Printing</h5>
+                        <ul class="text-muted" data-aos="fade-up" data-aos-delay="300">
+                            <li>The wing, tail, fuselage, and landing gear components were all 3D printed using optimized settings to balance strength and weight.</li>
+                            <li>Adjustments to the internal lattice structure of the wings and the fuselage design were made to ensure structural integrity while minimizing weight.</li>
+                        </ul>
+
+                        <h5 class="fw-semibold mt-4" data-aos="fade-up" data-aos-delay="300">Assembly</h5>
+                        <ul class="text-muted" data-aos="fade-up" data-aos-delay="400">
+                            <li>The wing was attached to the fuselage using super glue, with precise alignment ensured through built-in holes and extruded sections.</li>
+                            <li>The horizontal and vertical tails were similarly attached, with carbon fiber spars initially used for added strength, later replaced by simpler attachment methods.</li>
+                            <li>The landing gear was assembled and attached, ensuring the correct incidence angle and weight distribution for stable flight.</li>
+                        </ul>
+
+                        <h5 class="fw-semibold mt-4" data-aos="fade-up" data-aos-delay="500">Testing and Adjustments</h5>
+                        <ul class="text-muted" data-aos="fade-up" data-aos-delay="600">
+                            <li>Multiple test flights were conducted to assess the aircraft's performance.</li>
+                            <li>Adjustments were made to the control surfaces, wing structure, and fuselage design based on test results to optimize flight stability and control.</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <div class="row mb-4">
+                            <div class="col-6" data-aos="zoom-in">
+                                <img src="../images/print1.JPG" alt="Failed attempt with LW PLA" class="img-fluid rounded shadow">
+                                <p class="text-muted mt-2 small">Failed attempt at using Lightweight PLA</p>
+                            </div>
+                            <div class="col-6" data-aos="zoom-in" data-aos-delay="100">
+                                <img src="../images/print2.PNG" alt="Prusa Software screenshot" class="img-fluid rounded shadow">
+                                <p class="text-muted mt-2 small">Use of custom printing techniques through Prusa's software</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="carousel" data-id="carousel4">
+                                    <div class="carousel-container rounded shadow aspect-1-1">
+                                        <img src="../images/assembly1.JPG" class="carousel-img active" alt="First complete aircraft">
+                                        <img src="../images/assembly2.JPEG" class="carousel-img" alt="Last complete aircraft">
+
+                                        <button class="carousel-btn prev-btn" data-target="carousel4">&#10094;</button>
+                                        <button class="carousel-btn next-btn" data-target="carousel4">&#10095;</button>
+                                    </div>
+                                </div>
+                                <p class="text-muted mt-2 small text-center">First and last completely manufactured RC aircraft</p>
+                            </div>
+                            <div class="col-6" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="carousel" data-id="carousel5">
+                                    <div class="carousel-container rounded shadow aspect-1-1">
+                                        <img src="../images/aircraft_gallery1.JPG" class="carousel-img active" alt="Manufacturing gallery 1">
+                                        <img src="../images/aircraft_gallery2.JPG" class="carousel-img" alt="Manufacturing gallery 2">
+                                        <img src="../images/aircraft_gallery3.JPG" class="carousel-img" alt="Manufacturing gallery 3">
+                                        <img src="../images/aircraft_gallery4.JPG" class="carousel-img" alt="Manufacturing gallery 4">
+                                        <img src="../images/aircraft_gallery5.JPG" class="carousel-img" alt="Manufacturing gallery 5">
+                                        <img src="../images/aircraft_gallery6.JPG" class="carousel-img" alt="Manufacturing gallery 6">
+
+                                        <button class="carousel-btn prev-btn" data-target="carousel5">&#10094;</button>
+                                        <button class="carousel-btn next-btn" data-target="carousel5">&#10095;</button>
+                                    </div>
+                                </div>
+                                <p class="text-muted mt-2 small text-center">Gallery of manufactured parts and working environment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-5">
+            <h2 class="fw-bold mb-3" data-aos="fade-up">3D Model of the Aircraft</h2>
+            <div class="sketchfab-embed-wrapper" data-aos="zoom-in">
+                <iframe
+                title="RC Plane"
+                frameborder="0"
+                allowfullscreen
+                mozallowfullscreen="true"
+                webkitallowfullscreen="true"
+                allow="autoplay; fullscreen; xr-spatial-tracking"
+                xr-spatial-tracking
+                execution-while-out-of-viewport
+                execution-while-not-rendered
+                web-share
+                src="https://sketchfab.com/models/ca9345e33ca246829845afe8dcb6d372/embed?autospin=1&autostart=1"
+                ></iframe>
+            </div>
+        </section>
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-start">
+                    <h2 class="fw-bold mb-3 text-start" data-aos="fade-up">90-second Pitch Video</h2>
+                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                        Explore my senior design capstone project at the University of Florida, where my team and I specialized in designing an innovative RC airplane. This 90s-style pitch video showcases the comprehensive process, from initial concept and design iterations to the final test flights. Witness the collaborative effort and technical expertise that went into creating a high-performance aircraft, reflecting the challenges and achievements of our course.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="ratio ratio-16x9" data-aos="zoom-in">
+                        <iframe src="https://www.youtube.com/embed/LQelYQdtvYo"
+                                title="Aerospace Design Group 5" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="modern-footer text-center">
+        <div class="container">
+            <h5 class="footer-title mb-4">Get in Touch</h5>
+
+            <p class="mb-2">
+            <i class="fas fa-envelope me-2"></i>
+            <a href="mailto:d.reyes@columbia.edu">d.reyes@columbia.edu</a>
+            </p>
+            <p class="mb-4">
+            <i class="fas fa-phone me-2"></i>
+            <a href="tel:+17866750086">(786) 675-0086</a>
+            </p>
+
+            <h5 class="footer-title mb-3">Follow Me</h5>
+            <div class="social-icons d-flex justify-content-center gap-3 mb-4">
+            <a href="https://github.com/davidereyes2002" target="_blank" class="icon-btn" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/david-reyes-gua/" target="_blank" class="icon-btn" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            </div>
+
+            <div class="footer-copy mt-1">
+                &copy; 2025 David Reyes. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    class Carousel {
+        constructor(carouselElement) {
+        this.carouselElement = carouselElement;
+        this.imageElements = Array.from(carouselElement.querySelectorAll('.carousel-img'));
+        this.currentIndex = 0;
+        this.timer = null;
+        this.locked = false;
+
+        this.prevButton = document.querySelector(`.prev-btn[data-target="${this.id}"]`);
+        this.nextButton = document.querySelector(`.next-btn[data-target="${this.id}"]`);
+
+        this.prevButton.addEventListener('click', () => this.prev());
+        this.nextButton.addEventListener('click', () => this.next());
+
+        this.startAutoplay();
+        }
+
+        get id() {
+        return this.carouselElement.dataset.id;
+        }
+
+        showImage(newIndex, direction) {
+        if (this.locked || newIndex === this.currentIndex) return;
+
+        this.locked = true;
+        const currentImg = this.imageElements[this.currentIndex];
+        const nextImg = this.imageElements[newIndex];
+
+        // Reset classes
+        this.imageElements.forEach(img =>
+            img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
+        );
+
+        // Ensure current remains visible during transition
+        currentImg.classList.add('active');
+
+        // Prepare next image
+        nextImg.classList.add('wipe');
+        nextImg.classList.add(direction === 'next' ? 'wipe-right' : 'wipe-left');
+
+        // After animation completes, clean up
+        setTimeout(() => {
+            this.imageElements.forEach(img =>
+            img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
+            );
+            nextImg.classList.add('active');
+            this.currentIndex = newIndex;
+            this.locked = false;
+        }, 850); // slightly longer than animation
+
+        this.resetAutoplay();
+        }
+
+        next() {
+        const newIndex = (this.currentIndex + 1) % this.imageElements.length;
+        this.showImage(newIndex, 'next');
+        }
+
+        prev() {
+        const newIndex = (this.currentIndex - 1 + this.imageElements.length) % this.imageElements.length;
+        this.showImage(newIndex, 'prev');
+        }
+
+        startAutoplay() {
+        this.timer = setInterval(() => this.next(), 5000);
+        }
+
+        resetAutoplay() {
+        clearInterval(this.timer);
+        this.startAutoplay();
+        }
+    }
+
+    document.querySelectorAll('.carousel').forEach(carouselEl => {
+        new Carousel(carouselEl);
+    });
+    
+    window.addEventListener("DOMContentLoaded", () => {
+        initAOS();
+        initDropdowns();
+    });
+
+    function initAOS() {
+        AOS.init();
+        document.body.classList.add("loaded");
+    }
+
+    function initDropdowns() {
+        const dropdowns = document.querySelectorAll(".nav-item.dropdown");
+
+        dropdowns.forEach((dropdown) => {
+            const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+            const menu = dropdown.querySelector(".dropdown-menu");
+
+            // Show on hover
+            dropdown.addEventListener("mouseenter", () => {
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                bsDropdown.show();
+            });
+
+            // Hide on mouse leave
+            dropdown.addEventListener("mouseleave", () => {
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                bsDropdown.hide();
+            });
+
+            // Also allow click toggle (Bootstrap default)
+            toggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                if (menu.classList.contains("show")) {
+                    bsDropdown.hide();
+                } else {
+                    bsDropdown.show();
+                }
+            });
+        });
+    }
+    </script>
+
+
+
+</body>
+</html>

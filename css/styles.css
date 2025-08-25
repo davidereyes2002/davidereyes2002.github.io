@@ -1,0 +1,964 @@
+:root {
+  --accent: #5e81ac;
+}
+
+/* ====================
+   Base + Reset Styles
+==================== */
+body {
+  background: linear-gradient(135deg, #e8ecf4, #f7f9fb);
+  color: #212529;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #212529;
+  font-family: 'Merriweather', serif;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+main {
+  margin-bottom: 4rem;
+}
+
+/* ====================
+   Layout & Sectioning
+==================== */
+section {
+  border-bottom: 1px solid #dee2e6;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 2.2rem;    /* a bit larger than h2 inside cards */
+  font-weight: 700;
+  margin-bottom: 2rem;  /* space before deck */
+  text-align: center;   /* optional: center it */
+  color: #333;          /* dark gray for softer look */
+}
+
+
+/* ====================
+   Navbar Styling
+==================== */
+.custom-navbar {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+  align-items: center;
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 0.6rem;
+}
+
+.navbar-nav .nav-link {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.nav-link {
+  color: #f8f9fa !important;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+  position: relative;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link::after {
+  background-color: var(--accent);
+  content: '';
+  display: block;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1); /* expand only on hover */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--accent) !important;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-nav .nav-item.dropdown .nav-link {
+    color: #f8f9fa !important; /* default color */
+}
+
+.navbar-nav .nav-item.dropdown .nav-link:hover::after {
+    transform: scaleX(1); /* underline on hover only */
+}
+
+.navbar-nav .nav-item.dropdown .nav-link:hover {
+    color: var(--accent) !important;
+}
+
+/* ====================
+   Dropdown Menu
+==================== */
+.dropdown-menu {
+  background-color: #212529;
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: var(--accent);
+}
+
+/* ====================
+   Branding Elements
+==================== */
+.brand-icon {
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  color: var(--accent);
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 40px;
+}
+
+.brand-icon:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.brand-name {
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  transition: letter-spacing 0.3s ease;
+}
+
+.brand-name:hover {
+  letter-spacing: 1px;
+}
+
+/* ====================
+   About Section Revamp
+==================== */
+#about {
+  background: linear-gradient(135deg, #ffffff, #f1f3f5);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+#about h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+#about p {
+  color: #495057;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-top: 1rem;
+}
+
+#about img {
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+#featured {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* ====================
+   Cards
+==================== */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transform: translateY(-5px);
+}
+
+.card-body {
+  padding-bottom: 1.5rem;
+}
+
+.card-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ====================
+   Button Styling
+==================== */
+.btn {
+  border-radius: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent);
+  color: white;
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ====================
+   Timeline
+==================== */
+.timeline {
+  border-left: 2px solid #adb5bd;
+  list-style: none;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.timeline::before {
+  background-color: #adb5bd;
+  content: "";
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: height 1s ease-in-out;
+  width: 2px;
+}
+
+.timeline.timeline-visible::before {
+  height: 100%;
+}
+
+.timeline > div {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+/* ====================
+   Modern Footer
+==================== */
+footer.modern-footer {
+  background: #1c1f23;
+  color: #dee2e6;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer .footer-title {
+  color: #ffffff;
+  font-family: 'Merriweather', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+footer a {
+  color: #dee2e6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+footer .icon-btn {
+  align-items: center;
+  border: 2px solid #dee2e6;
+  border-radius: 50%;
+  color: #dee2e6;
+  display: flex;
+  font-size: 1.2rem;
+  height: 42px;
+  justify-content: center;
+  transition: all 0.3s ease;
+  width: 42px;
+}
+
+footer .icon-btn:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.footer-copy {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ====================
+   Responsive Fixes
+==================== */
+@media (max-width: 768px) {
+  #about {
+    text-align: center;
+  }
+
+  #about .row {
+    flex-direction: column-reverse;
+  }
+
+  #about h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ====================
+   Image Carousel
+==================== */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border-radius: 50%;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carousel-container:hover .carousel-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.carousel-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.carousel-img.active {
+  z-index: 1;
+}
+
+.carousel-img.wipe {
+  z-index: 2;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes wipe-right {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes wipe-left {
+  from { clip-path: inset(0 0 0 100%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.wipe-right {
+  animation-name: wipe-right;
+}
+
+.wipe-left {
+  animation-name: wipe-left;
+}
+
+/* NEW: use a non-Bootstrap class so it stays below the image */
+.carousel-subcaption {
+  position: static;      /* ensure it's not absolutely positioned */
+  display: block;
+  opacity: 1;            /* explicit default */
+  transition: opacity 0.4s ease;
+}
+
+.fade-out { opacity: 0; }
+.fade-in  { opacity: 1; }
+
+
+/* ====================
+   SketchFab
+==================== */
+.sketchfab-embed-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 40%;
+  height: 0;
+  overflow: hidden;
+}
+
+.sketchfab-embed-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ====================
+   Code Container
+==================== */
+.code-container {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.code-container.expanded {
+  max-height: 1030px;
+}
+
+/* ====================
+   PDF overlay
+==================== */
+.pdf-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;  
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1050;
+}
+
+.pdf-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pdf-overlay-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: 90vh;
+}
+
+.pdf-container {
+  position: fixed;
+  height: 90vh;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+      top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s ease,
+      opacity 0.4s ease;
+  z-index: 1051;
+}
+
+.pdf-container.closing {
+  transform: scale(0.85);
+  opacity: 0;
+}
+
+.pdf-container iframe {
+  flex-grow: 1;
+  width: 100%;
+  border: none;
+}
+
+.pdf-container .btn-close-pdf {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(220, 53, 69, 0.9);
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.pdf-container .btn-close-pdf:hover {
+  background-color: rgba(220, 53, 69, 1);
+}
+
+.btn-small-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.btn-small-group > .btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    height: 32px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    flex: 1 1 45%;
+    min-width: unset;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.btn-small-group > .btn i {
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.btn-small-group > .btn.flex-grow-1 {
+    flex-grow: 0;
+    min-width: 130px;
+}
+
+@media (max-width: 576px) {
+    .btn-small-group > .btn {
+        flex: 1 1 100%;
+    }
+}
+
+/* ====================
+   Diagram on Home Page
+==================== */
+.diagram-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  font-size: 0.85rem;
+}
+
+.diagram-horizontal {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.sub-node-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 140px;
+}
+
+.node {
+  background: #e1f5fe;
+  border: 2px solid #0288d1;
+  border-radius: 20px;
+  padding: 12px 25px;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(2, 136, 209, 0.2);
+  cursor: default;
+  transition: background 0.3s ease;
+}
+
+.node-sm {
+  background: #e3f2fd;
+  border: 2px solid #1976d2;
+  border-radius: 15px;
+  padding: 6px 12px;
+  width: 140px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.3);
+  cursor: default;
+}
+
+.connector-vertical, .connector-diagonal {
+  overflow: visible;
+}
+
+.connector-vertical line, .connector-diagonal line {
+  stroke-linecap: round;
+  stroke: #333;
+  stroke-width: 2;
+}
+
+.connector-vertical polygon, .connector-diagonal polygon {
+  fill: #333;
+}
+
+/* ====================
+   Image Block
+==================== */
+.image-block {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+.image-block img {
+  max-height: 300px;
+  max-width: 300px;
+  object-fit: cover;
+}
+
+.image-block p {
+  max-width: 80%;
+  flex-shrink: 0;
+}
+
+/* ====================
+   Week Deck of Cards
+==================== */
+.week-deck-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.week-deck {
+  position: relative;
+  flex: 1 1 600px; /* flex grows, min width for two-col */
+  min-width: 300px;
+  perspective: 1200px;
+  overflow: visible;   /* allow content to expand */
+  height: auto;        /* let JS resize it */
+  transition: height 0.5s ease; /* smooth resizing */
+}
+
+.week-card {
+  position: absolute;
+  width: 100%;
+  height: auto;        /* adapt to content */
+  min-height: 100%;    /* ensures tall enough for inner flex */
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease, opacity 0.7s ease, box-shadow 0.7s ease;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: inset(0 round 1rem);
+
+  display: flex;
+  flex-direction: column; /* so we can push progress down */
+}
+
+/* Active card */
+.week-card.active {
+  opacity: 1;
+  z-index: 10;
+  transform: translateX(0) scale(1) rotateY(0deg) translateZ(0);
+  pointer-events: auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* elevated shadow for active card */
+}
+
+/* Cards before active slide slightly left */
+.week-card.before {
+  opacity: 0;
+  z-index: 0;
+  transform: translateX(-60%) scale(0.85) rotateY(-30deg) translateZ(-80px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+/* Cards after active slide slightly right */
+.week-card.after {
+  opacity: 0;
+  z-index: 0;
+  transform: translateX(60%) scale(0.85) rotateY(30deg) translateZ(-80px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.deck-controls {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center align items */
+  gap: 1rem;
+  position: sticky;
+  top: 2rem;
+  background: rgba(255, 255, 255, 0.9); 
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex: 0 0 150px;
+}
+
+.deck-indicators-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.indicator-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+}
+
+.deck-indicators {
+  display: flex;
+  flex-direction: column;   /* stack spans vertically */
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.deck-indicators span {
+  min-width: 60px;
+  height: 34px;
+  padding: 0 0.6rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.deck-indicators span:hover {
+  transform: scale(1.05);
+}
+
+.deck-indicators span.active {
+  background: var(--accent, #ff6b6b);
+  color: #fff;
+}
+
+.week-prev-btn,
+.week-next-btn {
+  background: var(--accent, #ff6b6b);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: bold;
+  min-width: 80px; /* lock size so it doesn’t shrink */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Disabled state: fade + shrink, but keep space */
+.week-prev-btn[disabled],
+.week-next-btn[disabled] {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+.week-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.week-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.week-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    flex: 0 0 auto;
+}
+
+.week-progress {
+    flex: 0 0 auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent, #ff6b6b);
+    width: 0; /* adjust per week */
+    transition: width 0.5s ease;
+}
+
+@media (max-width: 992px) {
+  .week-deck-wrapper {
+    flex-direction: column;
+  }
+
+  .week-deck {
+    width: 100%;
+    min-width: 0;   /* remove 300px restriction */
+    flex: none;     /* stop flex behavior so it sizes like a block */
+  }
+  
+  .deck-controls {
+    position: static; /* no sticky */
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .deck-indicators-wrapper {
+    width: 100%; /* span full container */
+  }
+
+  .deck-indicators {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .deck-indicators span {
+    flex: 1 1 auto;       /* allow buttons to grow */
+    text-align: center;
+  }
+}
