@@ -395,19 +395,29 @@ footer .icon-btn:hover {
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
+
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* slightly smaller so icons fit nicely */
+
   border: none;
-  padding: 8px 14px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+
+  /* FIX: force perfect circle size */
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
   border-radius: 50%;
   line-height: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background 0.3s ease, transform 0.2s ease;
+
   opacity: 0;
   pointer-events: none;
 }
@@ -419,7 +429,12 @@ footer .icon-btn:hover {
 
 .carousel-btn:hover {
   background: rgba(0, 0, 0, 0.7);
-  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn,
+.next-btn {
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .prev-btn {
@@ -428,6 +443,24 @@ footer .icon-btn:hover {
 
 .next-btn {
   right: 10px;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-container .pause-btn {
+  top: auto !important;
+  bottom: 10px !important;
+  left: 10px !important;
+  right: auto !important;
+  transform: none !important;
+  font-size: 1rem;
+}
+
+.pause-btn:hover {
+  transform: scale(1.05);
 }
 
 .aspect-4-3 {
@@ -481,7 +514,6 @@ footer .icon-btn:hover {
   animation-name: wipe-left;
 }
 
-/* NEW: use a non-Bootstrap class so it stays below the image */
 .carousel-subcaption {
   position: static;      /* ensure it's not absolutely positioned */
   display: block;

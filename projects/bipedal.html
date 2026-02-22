@@ -1,803 +1,705 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="David, Reyes, Columbia University, Mechanical Engineering, Robotics">
-    <meta name="description" content="David Reyes's Portfolio Website">
-    <meta name="author" content="David Reyes">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
-
-    <link rel="icon" href="../favicon/favicon.ico" type="image/x-icon">
-
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-    <title>Bipedal Walker | David Reyes</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
-                <span class="brand-icon">DR</span>
-                <span class="brand-name">David Reyes</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../about.html">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Projects</a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow">
-                            <li><a class="dropdown-item" href="../projects/bipedal.html">Bipedal Walker</a></li>
-                            <li><a class="dropdown-item" href="../projects/aircraft.html">Aircraft Design</a></li>
-                            <li><a class="dropdown-item" href="../projects/digestor.html">Cow Digestor</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/davidereyes2002/gifreactgame_fastapi">GIF Reaction Game</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Relevant Coursework</a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow">
-                            <li><a class="dropdown-item" href="../coursework/labview.html">Data Acquisition</a></li>
-                            <li><a class="dropdown-item" href="../coursework/designlab.html">Manufacturing Lab</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
-    <main class="container mt-5">
-        <h1 class="text-center mb-5" data-aos="zoom-in-up">Bipedal Walker</h1>
-        <section class="mb-5">
-            <div class="row align-items-center">
-                <div class="col-md-10 mx-auto">
-                    <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
-                        <h2 class="fw-bold mb-3">Project Overview</h2>
-                        <p class="lead text-muted">
-                            Designed and built a robotic leg system as part of a project focused on developing modular, functional, and mechanically efficient joints. The robot features custom 3D-printed components, heat-set inserts, and precise servo motor control. Explored various motion patterns, addressed fit issues, and implemented robust error-handling in code. Applications include advancing robotics for confined spaces and automation. Demonstrated proficiency in CAD, motion planning, and hardware integration throughout the development process.    
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="week-deck-section mb-5 bg-light py-5 rounded shadow-sm">
-            <div class="container">
-                <h1 class="section-title">Development Timeline</h1>
-            </div>
-            <div class="container week-deck-wrapper">
-                <div class="week-deck">
-                    <div class="week-card" data-week="1">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 1: Concept Sketches</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        Starting off the design process, a few potential designs were to be devised, sketched out in pencil and paper.
-                                        The requirements for the project were that the robot make use of legged locomotion and be comprised of 8 rotational motors.
-                                        As part of each of the 3 sketches presented, estimated total motor energy consumption and battery life was included to provide as much detail as possible additional to the placement of electronic components and drawing techniques that bring realism.
-                                    </p>
-                                    <p class="week-description">
-                                        The first concept is a three legged robot that utilizes <strong>8</strong> motors, <strong>6</strong> for the two legs in the back and <strong>2</strong> for the front leg.
-                                        Inspiration for this concept came from a Star Wars vehicle called AT-AP.
-                                        <strong>This was the winning concept.</strong>
-                                    </p>
-                                    <p class="week-description">
-                                        The second concept is a six legged robot that also utilizes <strong>8</strong> motors, <strong>1</strong> for each leg and <strong>2</strong> to help the movement mechanism work.
-                                        Inspiration for this concept also came from a Star Wars vehicle called AT-TE.
-                                    </p>
-                                    <p class="week-description">
-                                        The third concept is a four legged robot makes use of <strong>6</strong> motors. The legs come in pairs, allocating <strong>3</strong> motors for each pair. AI was put to use to generate potential ideas, creating a frog-like robot that was deemed promising.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel1">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 1/concept1.PNG" class="carousel-img active" alt="Concept 1" data-caption="Sketch of the first concept">
-                                            <img src="../images/Development Timeline/Week 1/concept1_front_profile.PNG" class="carousel-img" alt="Concept 1 Front Profile" data-caption="Front profile sketch of the first concept">
-                                            <img src="../images/Development Timeline/Week 1/concept1_no_lid.PNG" class="carousel-img" alt="Concept 1 with No Lid" data-caption="Sketch of the first concept without the protective cover">
-                                            <img src="../images/Development Timeline/Week 1/concept1_side_profile.PNG" class="carousel-img" alt="Concept 1 Side Profile" data-caption="Side profile sketch of the first concept">
-                                            <img src="../images/Development Timeline/Week 1/concept2.PNG" class="carousel-img" alt="Concept 2" data-caption="Sketch of the second concept">
-                                            <img src="../images/Development Timeline/Week 1/concept2_front_profile.PNG" class="carousel-img" alt="Concept 2 Front Profile" data-caption="Front profile sketch of the second concept">
-                                            <img src="../images/Development Timeline/Week 1/concept2_no_lid.PNG" class="carousel-img" alt="Concept 2 with No Lid" data-caption="Sketch of the second concept without the protective cover">
-                                            <img src="../images/Development Timeline/Week 1/concept2_side_profile.PNG" class="carousel-img" alt="Concept 2 Side Profile" data-caption="Side profile sketch of the second concept">
-                                            <img src="../images/Development Timeline/Week 1/concept3.PNG" class="carousel-img" alt="Concept 3" data-caption="Sketch of the third concept">
-                                            <img src="../images/Development Timeline/Week 1/concept3_inspiration.jpg" class="carousel-img" alt="Concept 3 Inspiration" data-caption="Inspiration for the creation of the third concept">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel1">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel1">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            Sketch of the first concept
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 8.3%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="2">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 2: Preliminary CAD</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        Building on the initial sketches of the winning concept from Week 1, the next step was to create a preliminary CAD model to study the feasibility of the winning design. 
-                                        Using downloaded CAD models for components such as the Raspberry Pi, motors, controller board, and battery, the focus was placed on achieving an arrangement of all the major subsystems of the robot concept.
-                                        The winning concept was revised to fully integrate all the subsystems into one cohesive model.
-                                    </p>
-                                    <p class="week-description">
-                                        As part of the preliminary CAD model, the location and placement of the electronics were essential for the construction of the overall sructure of the robot, which was already planned ahead in the concept drafting step.
-                                        Moreover, the <strong>geometry</strong> and <strong>kinematics</strong> of the robot body and limbs is higlighted to ensure that the robot moves correctly and that the design appears stable. 
-                                        Details such as fasteners, mounts, and cable routing were left out to keep attention on core feasibility.
-                                    </p>
-                                    <p class="week-description">
-                                        This stage not only validated that the selected concept could be realistically assembled, but also helped identify areas for refinement and improvement moving forward. 
-                                        Finally, the robot was given a working name to help solidify its identity as the design progresses: <strong>Tri-nsport Robovehicle</strong>.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel2">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_front_render_far.jpg" class="carousel-img active" alt="Front Render Far" data-caption="Render of the Preliminary Design">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_front_render_left.jpg" class="carousel-img" alt="Front Render Left" data-caption="Render of the Preliminary Design (Front Close-up)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_front_render_left_close_up.jpg" class="carousel-img" alt="Front Render Left Close Up" data-caption="Render of the Preliminary Design (Right side)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_back_render_left.jpg" class="carousel-img" alt="Back Render Left" data-caption="Render of the Preliminary Design (Back)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_back_render.jpg" class="carousel-img" alt="Back Render" data-caption="Render of the Preliminary Design (Back Close-up)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_left_render_close_up.jpg" class="carousel-img" alt="Left Side Render Close Up" data-caption="Render of the Preliminary Design (Left side)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_render_in_context.jpg" class="carousel-img" alt="Render in Context" data-caption="Render of the Preliminary Design in Context">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_iso_no_edges.jpg" class="carousel-img" alt="Isometric View No Edges" data-caption="Isometric view of the Preliminary Design">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_iso_close_up.png" class="carousel-img" alt="Isometric View Close Up" data-caption="Isometric view of the Preliminary Design (Close-up)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_iso_exploded_view.png" class="carousel-img" alt="Isometric Exploded View" data-caption="Isometric Exploded View of the Preliminary Design">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_back_exploded_view.png" class="carousel-img" alt="Back Exploded View" data-caption="Isometric Exploded View of the Preliminary Design (Back)">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_walking_pose.png" class="carousel-img" alt="Walking Pose" data-caption="Walking Pose of the Preliminary Design">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_drawing1.png" class="carousel-img" alt="SolidWorks Drawing 1" data-caption="Front View SolidWorks Drawing of the Preliminary Design">
-                                            <img src="../images/Development Timeline/Week 2/preliminary_drawing2.png" class="carousel-img" alt="SolidWorks Drawing 2" data-caption="Side View SolidWorks Drawing of the Preliminary Design">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel2">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel2">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            Render of the Preliminary Design
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 16.6%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="3">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 3-4: Detailed CAD</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        At this stage, the design went through major changes. 
-                                        The idea of making the robot have three legs was scrapped and it was decided that it would only have two legs for locomotion.
-                                        The new design iteration gave the robot a new name: <strong>Bipedal Walker</strong>.
-                                    </p>
-                                    <p class="week-description">
-                                        This big design change presented new challenges but also the opportunity to learn more about bipedal robots.
-                                        The inspiration for the overall concept comes from a hybrid robot that is both a 3-legged and 2-legged robot, using the third leg for stability when standing still. 
-                                        Therefore, the 2-legged version was favored to provide a more concrete walking gait.
-                                        The removal of the third leg would improve battery life and reduce overall weight of the robot.
-                                    </p>
-                                    <p class="week-description">
-                                        Now that the design is more concrete and no significant design changes will occur, the new CAD model is now equipped with more detail. 
-                                        Fasteners are shown throughout the model, showcasing how all parts in the robot will be attached to each other.
-                                        It was prioritzed to use few different types of fasteners to reduce the size of the bill of materials and to not rely on complex fastening techniques.
-                                        Additionally, as part of the batch of new details, the robot was given a more organic look by reducing the number of straight edges.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel3">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_iso.jpg" class="carousel-img active" alt="Isometric View" data-caption="CAD model of the Detailed Design">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_iso_render_close_up.jpg" class="carousel-img" alt="Isometric View Render close-up" data-caption="Render of the Detailed (close-up)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_back_close_up.jpg" class="carousel-img" alt="Back View Render close-up" data-caption="Render of the Detailed Design (Back close-up)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_render_walking_pose.jpg" class="carousel-img" alt="Walking Pose" data-caption="Walking Pose of the Detailed Design">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_iso_render.jpg" class="carousel-img" alt="Isometric View Render" data-caption="Render of the Detailed Design">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_front_render_close_up_left.jpg" class="carousel-img" alt="Front View Render close-up" data-caption="Render of the Detailed Design (Front close-up)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_iso_render_super_close_up.jpg" class="carousel-img" alt="Isometric View Render super close-up" data-caption="Render of the Detailed Design (extreme close-up)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_back_render_left.jpg" class="carousel-img" alt="Back View Render from Left Side" data-caption="Render of the Detailed Design (Back Left Side)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_back_render.jpg" class="carousel-img" alt="Back View Render" data-caption="Render of the Detailed Design (Back)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_front_render_left.jpg" class="carousel-img" alt="Front View Render from Left Side" data-caption="Render of the Detailed Design (Front)">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_render_in_context.jpg" class="carousel-img" alt="Render in Context" data-caption="Render of the Detailed Design in Context">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_drawing1.png" class="carousel-img" alt="SolidWorks Drawing 1" data-caption="Front View SolidWorks Drawing of the Detailed Design">
-                                            <img src="../images/Development Timeline/Week 3-4/detailed_drawing2.png" class="carousel-img" alt="SolidWorks Drawing 2" data-caption="Side View SolidWorks Drawing of the Detailed Design">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel3">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel3">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            CAD model of the Detailed Design
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 33.2%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="4">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 5-6: Partial 3D Printing & Form-fit Testing</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        Now that the design of the robot is more concrete and finalized, it is imperative to test the functionality of the legs, the means of locomation for the robot.
-                                        At this stage, the goal is to manufacture and verify initial power, control, and motion of legs, while also updating the CAD model as necessary.
-                                        In this stage too, the control software was initially set up and devised to allow the testing of the leg.
-                                        The experimation of the control software in this stage was essential because it helped guarantee a working leg before fully commiting into the manufacture of the full robot.
-                                        Check out the <a href="https://youtu.be/UbBgbHiKyzA" target="_blank">video</a> of the leg working in its initial stages.
-                                    </p>
-                                    <p class="week-description">
-                                        The means of manufacture for the non-electronic and non-fastening parts of the robot are provided by 3D printers.
-                                        Even though 3D printing allows the complexity of parts to increase, because of time constrains, most manufactured parts were redesigned and updated with manufacturing times in mind.
-                                    </p>
-                                    <p class="week-description">
-                                        The CAD model was to be kept up to date with any changes.
-                                        It was made sure the CAD model matched the configuration at which the physical leg was assembled in.
-                                        Problems were determined and were documented, such as form and fit issues due to printer resolution.
-                                        As issues were noticed, new iterations of parts were outputted as fast as possible to resolve movement problems or interferences.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel4">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 5-6/3D_printed_parts_top.JPEG" class="carousel-img active" alt="3D Printed Parts Top View" data-caption="3D Printed Parts for the Leg">
-                                            <img src="../images/Development Timeline/Week 5-6/3D_printed_parts.JPEG" class="carousel-img" alt="3D Printed Parts" data-caption="3D Printed Parts for the Leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_1.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_2.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_3.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_4.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_5.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_6.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_1_top.JPEG" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-                                            <img src="../images/Development Timeline/Week 5-6/leg_motion_2_top.JPEG" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel4">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel4">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            3D Printed Parts for the Leg
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 49.8%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="5">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 7-8: Full Assembly & Basic Electronics Testing</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        All 3D-printed parts such as the body, legs, and supporting structures were produced and combined with electronic components, bolts, screws, cables, and mounts according to the most recent CAD model. 
-                                        This marked the first time the entire design was realized as a complete robot rather than just partial assemblies. 
-                                    </p>
-                                    <p class="week-description">
-                                        A few issues emerged during assembly, such as form and fit problems caused by 3D printer tolerances, which were documented and addressed by updating the CAD and reprinting affected parts. 
-                                        These small iterations improved the accuracy of the build and integration of all modules.
-                                    </p>
-                                    <p class="week-description">
-                                        With the Raspberry Pi, battery, and controller on board, the system was powered and controlled directly from its onboard hardware. 
-                                        This allowed the robot to demonstrate its first powered motions as a complete unit. 
-                                        Check out the <a href="https://www.youtube.com/watch?v=xK3uFMLWFHk" target="_blank">video</a> of the first fully assembled robot in action.
-                                    </p>
-                                    <p class="week-description">
-                                        These milestones confirmed the progress toward a functional robot and provided a strong foundation for the next stages of testing and refinement. 
-                                        Key specifications such as weight, dimensions, and overall power consumption were documented for future reference and comparison.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel5">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_1.JPEG" class="carousel-img active" alt="First Fully Assembled Robot 1" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_2.JPEG" class="carousel-img" alt="First Fully Assembled Robot 2" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_3.JPEG" class="carousel-img" alt="First Fully Assembled Robot 3" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_4.JPEG" class="carousel-img" alt="First Fully Assembled Robot 4" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_5.JPEG" class="carousel-img" alt="First Fully Assembled Robot 5" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_6.JPEG" class="carousel-img" alt="First Fully Assembled Robot 6" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_7.JPEG" class="carousel-img" alt="First Fully Assembled Robot 7" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_8.JPEG" class="carousel-img" alt="First Fully Assembled Robot 8" data-caption="First Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_9.JPEG" class="carousel-img" alt="First Fully Assembled Robot 9" data-caption="First Fully Assembled Robot">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel5">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel5">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            First Fully Assembled Robot
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 66.4%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="6">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 9-10: Initial Gait Programming</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        With the robot fully assembled and powered, the next step was to give it motion. 
-                                        Using the Raspberry Pi 4 Model B powered by the onboard battery, Python code was written and executed through a VNC server connection, allowing the robot to take its very first steps. 
-                                        All servo motors were routed and secured carefully to ensure proper control signals could be sent from the Raspberry Pi. 
-                                    </p>
-                                    <p class="week-description">
-                                        During the first walking trial, the robot successfully achieved locomotion but moved <strong>backwards</strong> instead of forwards. 
-                                        While this highlighted that the gait sequence was functional, it also showed that adjustments to the programmed motor angles and step timing were needed for future iterations. 
-                                        Performance measurements were taken during this first test: the robot traveled <strong>15 cm</strong> in <strong>19 seconds</strong>, giving a speed of approximately <strong>0.789 cm/s</strong>. 
-                                        The motion required <strong>16 cycles</strong> to cover this distance, or about <strong>1 cm per cycle</strong>. 
-                                        Considering the robot’s foot length of <strong>17 cm</strong>, this corresponds to roughly <strong>0.0588 foot lengths per cycle</strong>.
-                                    </p>
-                                    <p class="week-description">
-                                        This milestone marked an important transition from static assembly to true robotic behavior. 
-                                        Even though the gait sequence still requires refinement, the robot demonstrated untethered, powered walking for the first time. 
-                                        Check out the <a href="https://youtube.com/shorts/-atny-eBD20" target="_blank">video</a> of the robot’s first steps.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel6">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2.png" class="carousel-img active" alt="Second Version of the Fully Assembled Robot 1" data-caption="Second Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2_top_view.png" class="carousel-img" alt="Second Version of the Fully Assembled Robot 2" data-caption="Second Version of the Fully Assembled Robot (Top View)">
-                                            <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2_side_view.png" class="carousel-img" alt="Second Version of the Fully Assembled Robot 3" data-caption="Second Version of the Fully Assembled Robot (Side View)">
-                                            <img src="../images/Development Timeline/Week 9-10/hip_connection.png" class="carousel-img" alt="Hip Connection" data-caption="Close-up on Robot's Hip Connection">
-                                            <img src="../images/Development Timeline/Week 9-10/right_leg_and_passive_joints.png" class="carousel-img" alt="Right Leg and Passive Joint" data-caption="Close-up on Robot's Right Leg and Passive Joint">
-                                            <img src="../images/Development Timeline/Week 9-10/gait_performance_first_frame.JPEG" class="carousel-img" alt="First Frame of the Gait Performance Video" data-caption="First Frame of the Gait Performance Video">
-                                            <img src="../images/Development Timeline/Week 9-10/gait_performance_last_frame.JPEG" class="carousel-img" alt="Last Frame of the Gait Performance Video" data-caption="Last Frame of the Gait Performance Video">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel6">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel6">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            Second Version of the Fully Assembled Robot
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 83%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="week-card" data-week="7">
-                        <div class="week-card-inner">
-                            <div class="row align-items-center">
-                                <h2 class="week-title">Week 11-12: Refinement & Final Adjustments</h2>
-                                <div class="col-md-6">
-                                    <p class="week-description">
-                                        For the final stretch of the project, the robot’s legs were refined leading to improve its overall walking performance.
-                                        One of the biggest issues in earlier iterations had been the weakness of the passive joints.
-                                        They would often break, putting unnecessary strain on the motors. 
-                                        To fix this, the passive joints were redesigned and reinforced, giving the legs more strength while keeping them lightweight for locomotion.
-                                    </p>
-                                    <p class="week-description">
-                                        The robot could stand upright at any point in the servo cycle (static stability) and maintained balance fairly well during motion (dynamic stability), though aggressive moves could still cause minor instability if the surface wasn’t perfectly flat.
-                                        No sensors were used for feedback, meaning the gait was entirely pre-programmed and deterministic.                                    </p>
-                                    <p class="week-description">
-                                        In terms of performance, the final round of testing showed a significant improvement in speed compared to earlier weeks.
-                                        The robot was able to traverse 30 centimeters in 14.92 seconds, giving a maximum speed of <strong>2.01 cm/s</strong>.
-                                        A short <a href="https://youtube.com/shorts/JN9sTUCkfb8" target="_blank">video</a> was recorded of the robot walking alongside a tape measure to capture the performance.
-                                    </p>
-                                    <p class="week-description">
-                                        Overall, the refinements to the leg design and passive joints, along with correct gait programming, brought the project to a satisfying conclusion. 
-                                    </p>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div class="carousel" data-id="carousel7">
-                                        <div class="carousel-container rounded shadow aspect-1-1">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_1.JPG" class="carousel-img active" alt="Final Version of the Fully Assembled Robot 1" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_2.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 2" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_3.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 3" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_4.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 4" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_5.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 5" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_6.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 6" data-caption="Final Version of the Fully Assembled Robot">
-                                            <img src="../images/Development Timeline/Week 11-12/final_version_robot_legs.JPG" class="carousel-img" alt="Close-up on the Redesigned Leg Passive Joints" data-caption="Close-up on the Redesigned Leg Passive Joints">
-                                            <img src="../images/Development Timeline/Week 11-12/semi_extreme_robot_configuration.JPG" class="carousel-img" alt="Semi-extreme Robot Configuration" data-caption="Semi-extreme Robot Configuration">
-                                            <img src="../images/Development Timeline/Week 11-12/extreme_robot_configuration_1.JPG" class="carousel-img" alt="Extreme Robot Configuration 1" data-caption="Extreme Robot Configuration">
-                                            <img src="../images/Development Timeline/Week 11-12/extreme_robot_configuration_2.JPG" class="carousel-img" alt="Extreme Robot Configuration 2" data-caption="Extreme Robot Configuration">
-
-                                            <button class="carousel-btn prev-btn" data-target="carousel7">&#10094;</button>
-                                            <button class="carousel-btn next-btn" data-target="carousel7">&#10095;</button>
-                                        </div>
-                                        <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
-                                            Final Version of the Fully Assembled Robot
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="week-progress">
-                                    <label>Progress:</label>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 100%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="deck-controls">
-                    <button class="week-prev-btn">Prev</button>
-
-                    <div class="deck-indicators-wrapper">
-                        <span class="indicator-label">Weeks</span>
-                        <div class="deck-indicators">
-                            <span data-week="1" class="active">1</span>
-                            <span data-week="2">2</span>
-                            <span data-week="3">3-4</span>
-                            <span data-week="4">5-6</span>
-                            <span data-week="5">7-8</span>
-                            <span data-week="6">9-10</span>
-                            <span data-week="7">11-12</span>
-                        </div>
-                    </div>
-
-                    <button class="week-next-btn">Next</button>
-                </div>
-            </div>
-        </section>
-        
-        <section class="mb-5">
-            <div class="row align-items-center">
-                <div class="col-md-5 text-start">
-                    <h2 class="fw-bold mb-3 text-start" data-aos="fade-up">My Journey Video</h2>
-                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
-                        This video documents the entire process of designing, prototyping, and building a legged robot from the ground up. From initial sketches to CAD modeling, 3D printing, assembly, and programming, the project challenged me to integrate mechanics, electronics, and software to create a functional walking robot. Watch months of work come together in a final, working design. 
-                    </p>
-                </div>
-                <div class="col-md-7">
-                    <div class="ratio ratio-16x9" data-aos="zoom-in">
-                        <iframe src="https://www.youtube.com/embed/JbCZgbq841s" 
-                                title="MECE E4611 - Robotics Studio - Journey Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen
-                        ></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-5">
-            <h2 class="fw-bold mb-3" data-aos="fade-up">3D Model of my Robot</h2>
-            <div class="sketchfab-embed-wrapper" data-aos="zoom-in">
-                <iframe
-                title="Detailed Design - Overall Assembly  V1"
-                frameborder="0"
-                allowfullscreen
-                mozallowfullscreen="true"
-                webkitallowfullscreen="true"
-                allow="autoplay; fullscreen; xr-spatial-tracking"
-                xr-spatial-tracking
-                execution-while-out-of-viewport
-                execution-while-not-rendered
-                web-share
-                src="https://sketchfab.com/models/2dd0337cc36144c7ba597c684415d36c/embed?autospin=1&autostart=1"
-                ></iframe>
-            </div>
-        </section>
-    </main>
-
-
-    <footer class="modern-footer text-center">
-        <div class="container">
-            <h5 class="footer-title mb-4">Get in Touch</h5>
-
-            <p class="mb-2">
-            <i class="fas fa-envelope me-2"></i>
-            <a href="mailto:d.reyes@columbia.edu">d.reyes@columbia.edu</a>
-            </p>
-            <p class="mb-4">
-            <i class="fas fa-phone me-2"></i>
-            <a href="tel:+17866750086">(786) 675-0086</a>
-            </p>
-
-            <h5 class="footer-title mb-3">Follow Me</h5>
-            <div class="social-icons d-flex justify-content-center gap-3 mb-4">
-            <a href="https://github.com/davidereyes2002" target="_blank" class="icon-btn" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/david-reyes-gua/" target="_blank" class="icon-btn" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            </div>
-
-            <div class="footer-copy mt-1">
-                &copy; 2025 David Reyes. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
+---
+layout: default
+title: Bipedal Walker | David Reyes
+custom_js: |
     <script>
-    class Carousel {
-        constructor(carouselElement) {
-            this.carouselElement = carouselElement;
-            this.imageElements = Array.from(carouselElement.querySelectorAll('.carousel-img'));
-            this.captionElement = carouselElement.querySelector('.carousel-subcaption');
-            this.currentIndex = 0;
-            this.timer = null;
-            this.locked = false;
+        class Carousel {
+            constructor(carouselElement) {
+                this.carouselElement = carouselElement;
+                this.imageElements = Array.from(carouselElement.querySelectorAll('.carousel-img'));
+                this.captionElement = carouselElement.querySelector('.carousel-subcaption');
 
-            this.captionFadeOutT = null;
-            this.captionFadeInT = null;
+                this.currentIndex = 0;
+                this.timer = null;
+                this.locked = false;
+                this.isPaused = false;
 
-            this.prevButton = document.querySelector(`.prev-btn[data-target="${this.id}"]`);
-            this.nextButton = document.querySelector(`.next-btn[data-target="${this.id}"]`);
+                this.captionFadeOutT = null;
+                this.captionFadeInT = null;
 
-            this.prevButton.addEventListener('click', () => this.prev());
-            this.nextButton.addEventListener('click', () => this.next());
+                this.prevButton = document.querySelector(`.prev-btn[data-target="${this.id}"]`);
+                this.nextButton = document.querySelector(`.next-btn[data-target="${this.id}"]`);
 
-            this.setCaption(this.currentIndex, false);
+                this.prevButton.addEventListener('click', () => this.prev());
+                this.nextButton.addEventListener('click', () => this.next());
 
-            this.startAutoplay();
-        }
+                this.createPauseButton();
 
-        get id() {
-            return this.carouselElement.dataset.id;
-        }
+                this.setCaption(this.currentIndex, false);
 
-        showImage(newIndex, direction) {
-            if (this.locked || newIndex === this.currentIndex) return;
+                this.startAutoplay();
+            }
 
-            this.locked = true;
-            const currentImg = this.imageElements[this.currentIndex];
-            const nextImg = this.imageElements[newIndex];
+            get id() {
+                return this.carouselElement.dataset.id;
+            }
 
-            this.imageElements.forEach(img =>
-                img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
-            );
+            createPauseButton() {
+                const container = this.carouselElement.querySelector('.carousel-container');
 
-            currentImg.classList.add('active');
+                if (container.querySelector('.pause-btn')) return;
 
-            nextImg.classList.add('wipe');
-            nextImg.classList.add(direction === 'next' ? 'wipe-right' : 'wipe-left');
+                this.pauseButton = document.createElement('button');
+                this.pauseButton.className = 'carousel-btn pause-btn';
+                this.pauseButton.setAttribute('data-target', this.id);
+                this.pauseButton.textContent = "❚❚";
 
-            this.setCaption(newIndex, true); 
+                this.pauseButton.addEventListener('click', () => this.togglePause());
+                container.appendChild(this.pauseButton);
+            }
 
-            setTimeout(() => {
+            togglePause() {
+                this.isPaused = !this.isPaused;
+
+                if (this.isPaused) {
+                    clearInterval(this.timer);
+                    this.pauseButton.textContent = "▶";
+                } else {
+                    this.startAutoplay();
+                    this.pauseButton.textContent = "❚❚";
+                }
+            }
+
+            showImage(newIndex, direction) {
+                if (this.locked || newIndex === this.currentIndex) return;
+
+                this.locked = true;
+                const currentImg = this.imageElements[this.currentIndex];
+                const nextImg = this.imageElements[newIndex];
+
                 this.imageElements.forEach(img =>
                     img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
                 );
-                nextImg.classList.add('active');
-                this.currentIndex = newIndex;
-                this.locked = false;
-            }, 850);
 
-            this.resetAutoplay();
-        }
+                currentImg.classList.add('active');
 
-        setCaption(newIndex, animate = true) {
-            if (!this.captionElement) return;
-            const newCaption =
-            this.imageElements[newIndex].dataset.caption || this.imageElements[newIndex].alt || '';
+                nextImg.classList.add('wipe');
+                nextImg.classList.add(direction === 'next' ? 'wipe-right' : 'wipe-left');
 
-            // stop previous animations from stepping on the new one
-            clearTimeout(this.captionFadeOutT);
-            clearTimeout(this.captionFadeInT);
+                this.setCaption(newIndex, true); 
 
-            if (!animate) {
-                this.captionElement.textContent = newCaption;
-                this.captionElement.classList.remove('fade-out', 'fade-in');
-                return;
+                setTimeout(() => {
+                    this.imageElements.forEach(img =>
+                        img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
+                    );
+                    nextImg.classList.add('active');
+                    this.currentIndex = newIndex;
+                    this.locked = false;
+                }, 850);
+
+                if (!this.isPaused) this.resetAutoplay();
             }
 
-            this.captionElement.classList.add('fade-out');
+            setCaption(newIndex, animate = true) {
+                if (!this.captionElement) return;
 
-            // let it fade out first, then swap and fade in
-            this.captionFadeOutT = setTimeout(() => {
-                this.captionElement.textContent = newCaption;
-                this.captionElement.classList.remove('fade-out');
-                this.captionElement.classList.add('fade-in');
+                const newCaption =
+                    this.imageElements[newIndex].dataset.caption ||
+                    this.imageElements[newIndex].alt ||
+                    '';
 
-                this.captionFadeInT = setTimeout(() => {
-                    this.captionElement.classList.remove('fade-in'); // return to normal opacity
-                }, 400);
-            }, 300);
-        }
+                clearTimeout(this.captionFadeOutT);
+                clearTimeout(this.captionFadeInT);
 
-        next() {
-            const newIndex = (this.currentIndex + 1) % this.imageElements.length;
-            this.showImage(newIndex, 'next');
-        }
-
-        prev() {
-            const newIndex = (this.currentIndex - 1 + this.imageElements.length) % this.imageElements.length;
-            this.showImage(newIndex, 'prev');
-        }
-
-        startAutoplay() {
-            this.timer = setInterval(() => this.next(), 5000);
-        }
-
-        resetAutoplay() {
-            clearInterval(this.timer);
-            this.startAutoplay();
-        }
-    }
-
-    document.querySelectorAll('.carousel').forEach(carouselEl => {
-        new Carousel(carouselEl);
-    });
-
-    window.addEventListener("DOMContentLoaded", () => {
-        initAOS();
-        initDropdowns();
-        initWeekDeck();
-        resizeDeckToActive();
-    });
-
-    function initAOS() {
-        AOS.init();
-        document.body.classList.add("loaded");
-    }
-
-    function initDropdowns() {
-        const dropdowns = document.querySelectorAll(".nav-item.dropdown");
-
-        dropdowns.forEach((dropdown) => {
-            const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
-            const menu = dropdown.querySelector(".dropdown-menu");
-
-            dropdown.addEventListener("mouseenter", () => {
-                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                bsDropdown.show();
-            });
-
-            dropdown.addEventListener("mouseleave", () => {
-                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                bsDropdown.hide();
-            });
-
-            toggle.addEventListener("click", (e) => {
-                e.preventDefault();
-                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                if (menu.classList.contains("show")) {
-                    bsDropdown.hide();
-                } else {
-                    bsDropdown.show();
+                if (!animate) {
+                    this.captionElement.textContent = newCaption;
+                    this.captionElement.classList.remove('fade-out', 'fade-in');
+                    return;
                 }
-            });
+
+                this.captionElement.classList.add('fade-out');
+
+                this.captionFadeOutT = setTimeout(() => {
+                    this.captionElement.textContent = newCaption;
+                    this.captionElement.classList.remove('fade-out');
+                    this.captionElement.classList.add('fade-in');
+
+                    this.captionFadeInT = setTimeout(() => {
+                        this.captionElement.classList.remove('fade-in'); // return to normal opacity
+                    }, 400);
+                }, 300);
+            }
+
+            next() {
+                const newIndex = (this.currentIndex + 1) % this.imageElements.length;
+                this.showImage(newIndex, 'next');
+            }
+
+            prev() {
+                const newIndex = (this.currentIndex - 1 + this.imageElements.length) % this.imageElements.length;
+                this.showImage(newIndex, 'prev');
+            }
+
+            startAutoplay() {
+                clearInterval(this.timer);
+                this.timer = setInterval(() => {
+                    if (!this.isPaused) this.next();
+                }, 5000);
+            }
+
+            resetAutoplay() {
+                if (this.isPaused) return;
+                clearInterval(this.timer);
+                this.startAutoplay();
+            }
+        }
+
+        document.querySelectorAll('.carousel').forEach(carouselEl => {
+            new Carousel(carouselEl);
         });
-    }
 
-    function scrollToActiveCard() {
-        const activeCard = document.querySelector(".week-card.active");
-        if (activeCard) {
-            const cardTop = activeCard.getBoundingClientRect().top + window.scrollY;
-            const offset = window.innerHeight * 0.15;
-            window.scrollTo({
-                top: cardTop - offset,
-                behavior: "smooth"
-            });
+        window.addEventListener("DOMContentLoaded", () => {
+            initWeekDeck();
+            resizeDeckToActive();
+        });
+
+        function scrollToActiveCard() {
+            const activeCard = document.querySelector(".week-card.active");
+            if (activeCard) {
+                const cardTop = activeCard.getBoundingClientRect().top + window.scrollY;
+                const offset = window.innerHeight * 0.15;
+                window.scrollTo({
+                    top: cardTop - offset,
+                    behavior: "smooth"
+                });
+            }
         }
-    }
 
-    function initWeekDeck() { 
-        const cards = document.querySelectorAll(".week-card");
-        const prevBtn = document.querySelector(".week-prev-btn");
-        const nextBtn = document.querySelector(".week-next-btn");
-        const indicators = document.querySelectorAll(".deck-indicators span");
+        function initWeekDeck() { 
+            const cards = document.querySelectorAll(".week-card");
+            const prevBtn = document.querySelector(".week-prev-btn");
+            const nextBtn = document.querySelector(".week-next-btn");
+            const indicators = document.querySelectorAll(".deck-indicators span");
 
-        if (!cards.length) return;
+            if (!cards.length) return;
 
-        let currentIndex = 0;
+            let currentIndex = 0;
 
-        function updateDeck(targetIndex, { scroll = false } = {}) {
-            const forward = targetIndex > currentIndex;
+            function updateDeck(targetIndex, { scroll = false } = {}) {
+                const forward = targetIndex > currentIndex;
 
-            cards.forEach((card, i) => {
-                card.classList.remove("active", "before", "after");
+                cards.forEach((card, i) => {
+                    card.classList.remove("active", "before", "after");
 
-                if (i === targetIndex) {
-                    card.classList.add("active");
-                } else if (i < targetIndex) {
-                    card.classList.add("before");
-                } else {
-                    card.classList.add("after");
+                    if (i === targetIndex) {
+                        card.classList.add("active");
+                    } else if (i < targetIndex) {
+                        card.classList.add("before");
+                    } else {
+                        card.classList.add("after");
+                    }
+                });
+
+                indicators.forEach((ind, i) => {
+                    ind.classList.toggle("active", i === targetIndex);
+                });
+
+                prevBtn.disabled = targetIndex === 0;
+                nextBtn.disabled = targetIndex === cards.length - 1;
+
+                currentIndex = targetIndex;
+
+                if (scroll) {
+                    scrollToActiveCard();
                 }
+            }
+
+            prevBtn?.addEventListener("click", () => {
+                if (currentIndex > 0) updateDeck(currentIndex - 1, { scroll: true });
+            });
+
+            nextBtn?.addEventListener("click", () => {
+                if (currentIndex < cards.length - 1) updateDeck(currentIndex + 1, { scroll: true });
             });
 
             indicators.forEach((ind, i) => {
-                ind.classList.toggle("active", i === targetIndex);
+                ind.addEventListener("click", () => updateDeck(i, { scroll: true }));
             });
 
-            prevBtn.disabled = targetIndex === 0;
-            nextBtn.disabled = targetIndex === cards.length - 1;
+            updateDeck(0, { scroll: false });
+        }
 
-            currentIndex = targetIndex;
-
-            if (scroll) {
-                scrollToActiveCard();
+        function resizeDeckToActive() {
+            const deck = document.querySelector(".week-deck");
+            const activeCard = deck.querySelector(".week-card.active");
+            if (activeCard) {
+                deck.style.height = activeCard.offsetHeight + "px";
             }
         }
 
-        prevBtn?.addEventListener("click", () => {
-            if (currentIndex > 0) updateDeck(currentIndex - 1, { scroll: true });
-        });
-
-        nextBtn?.addEventListener("click", () => {
-            if (currentIndex < cards.length - 1) updateDeck(currentIndex + 1, { scroll: true });
-        });
-
-        indicators.forEach((ind, i) => {
-            ind.addEventListener("click", () => updateDeck(i, { scroll: true }));
-        });
-
-        updateDeck(0, { scroll: false });
-    }
-
-    function resizeDeckToActive() {
-        const deck = document.querySelector(".week-deck");
-        const activeCard = deck.querySelector(".week-card.active");
-        if (activeCard) {
-            deck.style.height = activeCard.offsetHeight + "px";
+        function setActiveCard(week) {
+            document.querySelectorAll(".week-card").forEach(card => {
+                card.classList.remove("active", "before", "after");
+            });
+            const active = document.querySelector(`.week-card[data-week="${week}"]`);
+            if (active) {
+                active.classList.add("active");
+                resizeDeckToActive();
+            }
         }
-    }
 
-    function setActiveCard(week) {
-        document.querySelectorAll(".week-card").forEach(card => {
-            card.classList.remove("active", "before", "after");
-        });
-        const active = document.querySelector(`.week-card[data-week="${week}"]`);
-        if (active) {
-            active.classList.add("active");
-            resizeDeckToActive();
-        }
-    }
-
-    window.addEventListener("resize", resizeDeckToActive);
+        window.addEventListener("resize", resizeDeckToActive);
 
     </script>
+---
+    
+<h1 class="text-center mb-5" data-aos="zoom-in-up">Bipedal Walker</h1>
+<section class="mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto">
+            <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                <h2 class="fw-bold mb-3">Project Overview</h2>
+                <p class="lead text-muted">
+                    Designed and built a robotic leg system as part of a project focused on developing modular, functional, and mechanically efficient joints. The robot features custom 3D-printed components, heat-set inserts, and precise servo motor control. Explored various motion patterns, addressed fit issues, and implemented robust error-handling in code. Applications include advancing robotics for confined spaces and automation. Demonstrated proficiency in CAD, motion planning, and hardware integration throughout the development process.    
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="week-deck-section mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <h1 class="section-title">Development Timeline</h1>
+    </div>
+    <div class="container week-deck-wrapper">
+        <div class="week-deck">
+            <div class="week-card" data-week="1">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 1: Concept Sketches</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                Starting off the design process, a few potential designs were to be devised, sketched out in pencil and paper.
+                                The requirements for the project were that the robot make use of legged locomotion and be comprised of 8 rotational motors.
+                                As part of each of the 3 sketches presented, estimated total motor energy consumption and battery life was included to provide as much detail as possible additional to the placement of electronic components and drawing techniques that bring realism.
+                            </p>
+                            <p class="week-description">
+                                The first concept is a three legged robot that utilizes <strong>8</strong> motors, <strong>6</strong> for the two legs in the back and <strong>2</strong> for the front leg.
+                                Inspiration for this concept came from a Star Wars vehicle called AT-AP.
+                                <strong>This was the winning concept.</strong>
+                            </p>
+                            <p class="week-description">
+                                The second concept is a six legged robot that also utilizes <strong>8</strong> motors, <strong>1</strong> for each leg and <strong>2</strong> to help the movement mechanism work.
+                                Inspiration for this concept also came from a Star Wars vehicle called AT-TE.
+                            </p>
+                            <p class="week-description">
+                                The third concept is a four legged robot makes use of <strong>6</strong> motors. The legs come in pairs, allocating <strong>3</strong> motors for each pair. AI was put to use to generate potential ideas, creating a frog-like robot that was deemed promising.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel1">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 1/concept1.PNG" class="carousel-img active" alt="Concept 1" data-caption="Sketch of the first concept">
+                                    <img src="../images/Development Timeline/Week 1/concept1_front_profile.PNG" class="carousel-img" alt="Concept 1 Front Profile" data-caption="Front profile sketch of the first concept">
+                                    <img src="../images/Development Timeline/Week 1/concept1_no_lid.PNG" class="carousel-img" alt="Concept 1 with No Lid" data-caption="Sketch of the first concept without the protective cover">
+                                    <img src="../images/Development Timeline/Week 1/concept1_side_profile.PNG" class="carousel-img" alt="Concept 1 Side Profile" data-caption="Side profile sketch of the first concept">
+                                    <img src="../images/Development Timeline/Week 1/concept2.PNG" class="carousel-img" alt="Concept 2" data-caption="Sketch of the second concept">
+                                    <img src="../images/Development Timeline/Week 1/concept2_front_profile.PNG" class="carousel-img" alt="Concept 2 Front Profile" data-caption="Front profile sketch of the second concept">
+                                    <img src="../images/Development Timeline/Week 1/concept2_no_lid.PNG" class="carousel-img" alt="Concept 2 with No Lid" data-caption="Sketch of the second concept without the protective cover">
+                                    <img src="../images/Development Timeline/Week 1/concept2_side_profile.PNG" class="carousel-img" alt="Concept 2 Side Profile" data-caption="Side profile sketch of the second concept">
+                                    <img src="../images/Development Timeline/Week 1/concept3.PNG" class="carousel-img" alt="Concept 3" data-caption="Sketch of the third concept">
+                                    <img src="../images/Development Timeline/Week 1/concept3_inspiration.jpg" class="carousel-img" alt="Concept 3 Inspiration" data-caption="Inspiration for the creation of the third concept">
 
+                                    <button class="carousel-btn prev-btn" data-target="carousel1">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel1">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Sketch of the first concept
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 8.3%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="2">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 2: Preliminary CAD</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                Building on the initial sketches of the winning concept from Week 1, the next step was to create a preliminary CAD model to study the feasibility of the winning design. 
+                                Using downloaded CAD models for components such as the Raspberry Pi, motors, controller board, and battery, the focus was placed on achieving an arrangement of all the major subsystems of the robot concept.
+                                The winning concept was revised to fully integrate all the subsystems into one cohesive model.
+                            </p>
+                            <p class="week-description">
+                                As part of the preliminary CAD model, the location and placement of the electronics were essential for the construction of the overall sructure of the robot, which was already planned ahead in the concept drafting step.
+                                Moreover, the <strong>geometry</strong> and <strong>kinematics</strong> of the robot body and limbs is higlighted to ensure that the robot moves correctly and that the design appears stable. 
+                                Details such as fasteners, mounts, and cable routing were left out to keep attention on core feasibility.
+                            </p>
+                            <p class="week-description">
+                                This stage not only validated that the selected concept could be realistically assembled, but also helped identify areas for refinement and improvement moving forward. 
+                                Finally, the robot was given a working name to help solidify its identity as the design progresses: <strong>Tri-nsport Robovehicle</strong>.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel2">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_front_render_far.jpg" class="carousel-img active" alt="Front Render Far" data-caption="Render of the Preliminary Design">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_front_render_left.jpg" class="carousel-img" alt="Front Render Left" data-caption="Render of the Preliminary Design (Front Close-up)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_front_render_left_close_up.jpg" class="carousel-img" alt="Front Render Left Close Up" data-caption="Render of the Preliminary Design (Right side)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_back_render_left.jpg" class="carousel-img" alt="Back Render Left" data-caption="Render of the Preliminary Design (Back)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_back_render.jpg" class="carousel-img" alt="Back Render" data-caption="Render of the Preliminary Design (Back Close-up)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_left_render_close_up.jpg" class="carousel-img" alt="Left Side Render Close Up" data-caption="Render of the Preliminary Design (Left side)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_render_in_context.jpg" class="carousel-img" alt="Render in Context" data-caption="Render of the Preliminary Design in Context">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_iso_no_edges.jpg" class="carousel-img" alt="Isometric View No Edges" data-caption="Isometric view of the Preliminary Design">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_iso_close_up.png" class="carousel-img" alt="Isometric View Close Up" data-caption="Isometric view of the Preliminary Design (Close-up)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_iso_exploded_view.png" class="carousel-img" alt="Isometric Exploded View" data-caption="Isometric Exploded View of the Preliminary Design">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_back_exploded_view.png" class="carousel-img" alt="Back Exploded View" data-caption="Isometric Exploded View of the Preliminary Design (Back)">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_walking_pose.png" class="carousel-img" alt="Walking Pose" data-caption="Walking Pose of the Preliminary Design">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_drawing1.png" class="carousel-img" alt="SolidWorks Drawing 1" data-caption="Front View SolidWorks Drawing of the Preliminary Design">
+                                    <img src="../images/Development Timeline/Week 2/preliminary_drawing2.png" class="carousel-img" alt="SolidWorks Drawing 2" data-caption="Side View SolidWorks Drawing of the Preliminary Design">
 
-</body>
-</html>
+                                    <button class="carousel-btn prev-btn" data-target="carousel2">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel2">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Render of the Preliminary Design
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 16.6%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="3">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 3-4: Detailed CAD</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                At this stage, the design went through major changes. 
+                                The idea of making the robot have three legs was scrapped and it was decided that it would only have two legs for locomotion.
+                                The new design iteration gave the robot a new name: <strong>Bipedal Walker</strong>.
+                            </p>
+                            <p class="week-description">
+                                This big design change presented new challenges but also the opportunity to learn more about bipedal robots.
+                                The inspiration for the overall concept comes from a hybrid robot that is both a 3-legged and 2-legged robot, using the third leg for stability when standing still. 
+                                Therefore, the 2-legged version was favored to provide a more concrete walking gait.
+                                The removal of the third leg would improve battery life and reduce overall weight of the robot.
+                            </p>
+                            <p class="week-description">
+                                Now that the design is more concrete and no significant design changes will occur, the new CAD model is now equipped with more detail. 
+                                Fasteners are shown throughout the model, showcasing how all parts in the robot will be attached to each other.
+                                It was prioritzed to use few different types of fasteners to reduce the size of the bill of materials and to not rely on complex fastening techniques.
+                                Additionally, as part of the batch of new details, the robot was given a more organic look by reducing the number of straight edges.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel3">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_iso.jpg" class="carousel-img active" alt="Isometric View" data-caption="CAD model of the Detailed Design">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_iso_render_close_up.jpg" class="carousel-img" alt="Isometric View Render close-up" data-caption="Render of the Detailed (close-up)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_back_close_up.jpg" class="carousel-img" alt="Back View Render close-up" data-caption="Render of the Detailed Design (Back close-up)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_render_walking_pose.jpg" class="carousel-img" alt="Walking Pose" data-caption="Walking Pose of the Detailed Design">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_iso_render.jpg" class="carousel-img" alt="Isometric View Render" data-caption="Render of the Detailed Design">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_front_render_close_up_left.jpg" class="carousel-img" alt="Front View Render close-up" data-caption="Render of the Detailed Design (Front close-up)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_iso_render_super_close_up.jpg" class="carousel-img" alt="Isometric View Render super close-up" data-caption="Render of the Detailed Design (extreme close-up)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_back_render_left.jpg" class="carousel-img" alt="Back View Render from Left Side" data-caption="Render of the Detailed Design (Back Left Side)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_back_render.jpg" class="carousel-img" alt="Back View Render" data-caption="Render of the Detailed Design (Back)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_front_render_left.jpg" class="carousel-img" alt="Front View Render from Left Side" data-caption="Render of the Detailed Design (Front)">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_render_in_context.jpg" class="carousel-img" alt="Render in Context" data-caption="Render of the Detailed Design in Context">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_drawing1.png" class="carousel-img" alt="SolidWorks Drawing 1" data-caption="Front View SolidWorks Drawing of the Detailed Design">
+                                    <img src="../images/Development Timeline/Week 3-4/detailed_drawing2.png" class="carousel-img" alt="SolidWorks Drawing 2" data-caption="Side View SolidWorks Drawing of the Detailed Design">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel3">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel3">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    CAD model of the Detailed Design
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 33.2%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="4">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 5-6: Partial 3D Printing & Form-fit Testing</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                Now that the design of the robot is more concrete and finalized, it is imperative to test the functionality of the legs, the means of locomation for the robot.
+                                At this stage, the goal is to manufacture and verify initial power, control, and motion of legs, while also updating the CAD model as necessary.
+                                In this stage too, the control software was initially set up and devised to allow the testing of the leg.
+                                The experimation of the control software in this stage was essential because it helped guarantee a working leg before fully commiting into the manufacture of the full robot.
+                                Check out the <a href="https://youtu.be/UbBgbHiKyzA" target="_blank">video</a> of the leg working in its initial stages.
+                            </p>
+                            <p class="week-description">
+                                The means of manufacture for the non-electronic and non-fastening parts of the robot are provided by 3D printers.
+                                Even though 3D printing allows the complexity of parts to increase, because of time constrains, most manufactured parts were redesigned and updated with manufacturing times in mind.
+                            </p>
+                            <p class="week-description">
+                                The CAD model was to be kept up to date with any changes.
+                                It was made sure the CAD model matched the configuration at which the physical leg was assembled in.
+                                Problems were determined and were documented, such as form and fit issues due to printer resolution.
+                                As issues were noticed, new iterations of parts were outputted as fast as possible to resolve movement problems or interferences.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel4">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 5-6/3D_printed_parts_top.JPEG" class="carousel-img active" alt="3D Printed Parts Top View" data-caption="3D Printed Parts for the Leg">
+                                    <img src="../images/Development Timeline/Week 5-6/3D_printed_parts.JPEG" class="carousel-img" alt="3D Printed Parts" data-caption="3D Printed Parts for the Leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_1.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_2.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_3.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_4.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_5.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_6.jpg" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_1_top.JPEG" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+                                    <img src="../images/Development Timeline/Week 5-6/leg_motion_2_top.JPEG" class="carousel-img" alt="Video frame of the functional leg" data-caption="Video frame of the functional leg">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel4">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel4">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    3D Printed Parts for the Leg
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 49.8%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="5">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 7-8: Full Assembly & Basic Electronics Testing</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                All 3D-printed parts such as the body, legs, and supporting structures were produced and combined with electronic components, bolts, screws, cables, and mounts according to the most recent CAD model. 
+                                This marked the first time the entire design was realized as a complete robot rather than just partial assemblies. 
+                            </p>
+                            <p class="week-description">
+                                A few issues emerged during assembly, such as form and fit problems caused by 3D printer tolerances, which were documented and addressed by updating the CAD and reprinting affected parts. 
+                                These small iterations improved the accuracy of the build and integration of all modules.
+                            </p>
+                            <p class="week-description">
+                                With the Raspberry Pi, battery, and controller on board, the system was powered and controlled directly from its onboard hardware. 
+                                This allowed the robot to demonstrate its first powered motions as a complete unit. 
+                                Check out the <a href="https://www.youtube.com/watch?v=xK3uFMLWFHk" target="_blank">video</a> of the first fully assembled robot in action.
+                            </p>
+                            <p class="week-description">
+                                These milestones confirmed the progress toward a functional robot and provided a strong foundation for the next stages of testing and refinement. 
+                                Key specifications such as weight, dimensions, and overall power consumption were documented for future reference and comparison.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel5">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_1.JPEG" class="carousel-img active" alt="First Fully Assembled Robot 1" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_2.JPEG" class="carousel-img" alt="First Fully Assembled Robot 2" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_3.JPEG" class="carousel-img" alt="First Fully Assembled Robot 3" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_4.JPEG" class="carousel-img" alt="First Fully Assembled Robot 4" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_5.JPEG" class="carousel-img" alt="First Fully Assembled Robot 5" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_6.JPEG" class="carousel-img" alt="First Fully Assembled Robot 6" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_7.JPEG" class="carousel-img" alt="First Fully Assembled Robot 7" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_8.JPEG" class="carousel-img" alt="First Fully Assembled Robot 8" data-caption="First Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 7-8/robot_glamour_photo_9.JPEG" class="carousel-img" alt="First Fully Assembled Robot 9" data-caption="First Fully Assembled Robot">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel5">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel5">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    First Fully Assembled Robot
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 66.4%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="6">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 9-10: Initial Gait Programming</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                With the robot fully assembled and powered, the next step was to give it motion. 
+                                Using the Raspberry Pi 4 Model B powered by the onboard battery, Python code was written and executed through a VNC server connection, allowing the robot to take its very first steps. 
+                                All servo motors were routed and secured carefully to ensure proper control signals could be sent from the Raspberry Pi. 
+                            </p>
+                            <p class="week-description">
+                                During the first walking trial, the robot successfully achieved locomotion but moved <strong>backwards</strong> instead of forwards. 
+                                While this highlighted that the gait sequence was functional, it also showed that adjustments to the programmed motor angles and step timing were needed for future iterations. 
+                                Performance measurements were taken during this first test: the robot traveled <strong>15 cm</strong> in <strong>19 seconds</strong>, giving a speed of approximately <strong>0.789 cm/s</strong>. 
+                                The motion required <strong>16 cycles</strong> to cover this distance, or about <strong>1 cm per cycle</strong>. 
+                                Considering the robot’s foot length of <strong>17 cm</strong>, this corresponds to roughly <strong>0.0588 foot lengths per cycle</strong>.
+                            </p>
+                            <p class="week-description">
+                                This milestone marked an important transition from static assembly to true robotic behavior. 
+                                Even though the gait sequence still requires refinement, the robot demonstrated untethered, powered walking for the first time. 
+                                Check out the <a href="https://youtube.com/shorts/-atny-eBD20" target="_blank">video</a> of the robot’s first steps.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel6">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2.png" class="carousel-img active" alt="Second Version of the Fully Assembled Robot 1" data-caption="Second Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2_top_view.png" class="carousel-img" alt="Second Version of the Fully Assembled Robot 2" data-caption="Second Version of the Fully Assembled Robot (Top View)">
+                                    <img src="../images/Development Timeline/Week 9-10/fully_assembled_robot_v2_side_view.png" class="carousel-img" alt="Second Version of the Fully Assembled Robot 3" data-caption="Second Version of the Fully Assembled Robot (Side View)">
+                                    <img src="../images/Development Timeline/Week 9-10/hip_connection.png" class="carousel-img" alt="Hip Connection" data-caption="Close-up on Robot's Hip Connection">
+                                    <img src="../images/Development Timeline/Week 9-10/right_leg_and_passive_joints.png" class="carousel-img" alt="Right Leg and Passive Joint" data-caption="Close-up on Robot's Right Leg and Passive Joint">
+                                    <img src="../images/Development Timeline/Week 9-10/gait_performance_first_frame.JPEG" class="carousel-img" alt="First Frame of the Gait Performance Video" data-caption="First Frame of the Gait Performance Video">
+                                    <img src="../images/Development Timeline/Week 9-10/gait_performance_last_frame.JPEG" class="carousel-img" alt="Last Frame of the Gait Performance Video" data-caption="Last Frame of the Gait Performance Video">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel6">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel6">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Second Version of the Fully Assembled Robot
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 83%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-card" data-week="7">
+                <div class="week-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="week-title">Week 11-12: Refinement & Final Adjustments</h2>
+                        <div class="col-md-6">
+                            <p class="week-description">
+                                For the final stretch of the project, the robot’s legs were refined leading to improve its overall walking performance.
+                                One of the biggest issues in earlier iterations had been the weakness of the passive joints.
+                                They would often break, putting unnecessary strain on the motors. 
+                                To fix this, the passive joints were redesigned and reinforced, giving the legs more strength while keeping them lightweight for locomotion.
+                            </p>
+                            <p class="week-description">
+                                The robot could stand upright at any point in the servo cycle (static stability) and maintained balance fairly well during motion (dynamic stability), though aggressive moves could still cause minor instability if the surface wasn’t perfectly flat.
+                                No sensors were used for feedback, meaning the gait was entirely pre-programmed and deterministic.                                    </p>
+                            <p class="week-description">
+                                In terms of performance, the final round of testing showed a significant improvement in speed compared to earlier weeks.
+                                The robot was able to traverse 30 centimeters in 14.92 seconds, giving a maximum speed of <strong>2.01 cm/s</strong>.
+                                A short <a href="https://youtube.com/shorts/JN9sTUCkfb8" target="_blank">video</a> was recorded of the robot walking alongside a tape measure to capture the performance.
+                            </p>
+                            <p class="week-description">
+                                Overall, the refinements to the leg design and passive joints, along with correct gait programming, brought the project to a satisfying conclusion. 
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel7">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_1.JPG" class="carousel-img active" alt="Final Version of the Fully Assembled Robot 1" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_2.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 2" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_3.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 3" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_4.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 4" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_5.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 5" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/Final_version_robot_assembled_6.JPG" class="carousel-img" alt="Final Version of the Fully Assembled Robot 6" data-caption="Final Version of the Fully Assembled Robot">
+                                    <img src="../images/Development Timeline/Week 11-12/final_version_robot_legs.JPG" class="carousel-img" alt="Close-up on the Redesigned Leg Passive Joints" data-caption="Close-up on the Redesigned Leg Passive Joints">
+                                    <img src="../images/Development Timeline/Week 11-12/semi_extreme_robot_configuration.JPG" class="carousel-img" alt="Semi-extreme Robot Configuration" data-caption="Semi-extreme Robot Configuration">
+                                    <img src="../images/Development Timeline/Week 11-12/extreme_robot_configuration_1.JPG" class="carousel-img" alt="Extreme Robot Configuration 1" data-caption="Extreme Robot Configuration">
+                                    <img src="../images/Development Timeline/Week 11-12/extreme_robot_configuration_2.JPG" class="carousel-img" alt="Extreme Robot Configuration 2" data-caption="Extreme Robot Configuration">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel7">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel7">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Final Version of the Fully Assembled Robot
+                                </p>
+                            </div>
+                        </div>
+                        <div class="week-progress">
+                            <label>Progress:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="deck-controls">
+            <button class="week-prev-btn">Prev</button>
+
+            <div class="deck-indicators-wrapper">
+                <span class="indicator-label">Weeks</span>
+                <div class="deck-indicators">
+                    <span data-week="1" class="active">1</span>
+                    <span data-week="2">2</span>
+                    <span data-week="3">3-4</span>
+                    <span data-week="4">5-6</span>
+                    <span data-week="5">7-8</span>
+                    <span data-week="6">9-10</span>
+                    <span data-week="7">11-12</span>
+                </div>
+            </div>
+
+            <button class="week-next-btn">Next</button>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-5 text-start">
+            <h2 class="fw-bold mb-3 text-start" data-aos="fade-up">My Journey Video</h2>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                This video documents the entire process of designing, prototyping, and building a legged robot from the ground up. From initial sketches to CAD modeling, 3D printing, assembly, and programming, the project challenged me to integrate mechanics, electronics, and software to create a functional walking robot. Watch months of work come together in a final, working design. 
+            </p>
+        </div>
+        <div class="col-md-7">
+            <div class="ratio ratio-16x9" data-aos="zoom-in">
+                <iframe src="https://www.youtube.com/embed/JbCZgbq841s" 
+                        title="MECE E4611 - Robotics Studio - Journey Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                ></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <h2 class="fw-bold mb-3" data-aos="fade-up">3D Model of my Robot</h2>
+    <div class="sketchfab-embed-wrapper" data-aos="zoom-in">
+        <iframe
+        title="Detailed Design - Overall Assembly  V1"
+        frameborder="0"
+        allowfullscreen
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        xr-spatial-tracking
+        execution-while-out-of-viewport
+        execution-while-not-rendered
+        web-share
+        src="https://sketchfab.com/models/2dd0337cc36144c7ba597c684415d36c/embed?autospin=1&autostart=1"
+        ></iframe>
+    </div>
+</section>
