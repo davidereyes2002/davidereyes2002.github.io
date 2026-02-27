@@ -1,0 +1,174 @@
+---
+layout: default
+title: Thermal Analysis | David Reyes
+custom_js: |
+
+---
+
+<h1 class="text-center mb-5" data-aos="fade-up">Hydraulic Press System Analysis</h1>
+<section class="mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto">
+            <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                <h2 class="fw-bold mb-3">Project Overview</h2>
+                <p class="lead text-muted">
+                    This project analyzed the piping system of a hydraulic press to determine an appropriately sized pump,
+                    return line diameter, and pressure-relief valve. The system was evaluated using conservation of mass,
+                    the energy equation, and fluid mechanics principles to calculate head availability, head losses,
+                    and Net Positive Suction Head (NPSH).
+                </p>
+                <p class="text-muted">
+                    Engineering decisions were validated through analytical calculations and component research to ensure
+                    the system satisfied flowrate requirements (20–30 gpm), prevented cavitation, minimized cost,
+                    and maintained reliable operation.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4" data-aos="fade-up">Hydraulic System Configuration</h2>
+
+                <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                    The hydraulic press system consisted of a supply tank, pump inlet line, outlet line,
+                    elevated discharge tank, and return line. Hydraulic oil circulated through the system
+                    while meeting specified pressure and flow constraints.
+                </p>
+
+                <ul class="text-muted" style="line-height:1.8;" data-aos="fade-up" data-aos-delay="200">
+                    <li>Supply tank capacity: 10 gallons</li>
+                    <li>Supply tank cross-sectional area: 2.5 m<sup>2</sup></li>
+                    <li>Required flowrate: 20–30 gpm</li>
+                    <li>Operating pressure: 30 psia</li>
+                    <li>Inlet pipe length: 2.5 m (2" schedule 40 PVC)</li>
+                    <li>Outlet pipe length: 6 m (1.5" schedule 40 PVC)</li>
+                    <li>Return line length: 12 m</li>
+                    <li>Height difference between tanks: 6 ft</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-6 text-center" data-aos="fade-left">
+                <div style="border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <img src="../images/hydraulic-diagram.png" class="img-fluid" alt="Hydraulic system diagram">
+                </div>
+                <small class="text-muted d-block mt-2">Hydraulic press piping system configuration</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="container">
+        <h2 class="fw-bold mb-3" data-aos="fade-up">Engineering Approach</h2>
+
+        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+            The system was analyzed using steady-state incompressible flow assumptions.
+            Key calculations included:
+        </p>
+
+        <ul class="text-muted" style="line-height:1.9;" data-aos="fade-up" data-aos-delay="200">
+            <li>Energy equation and conservation of mass</li>
+            <li>Head availability from tank elevations</li>
+            <li>Net Positive Suction Head (NPSH) analysis</li>
+            <li>Pipe head losses due to friction and fittings</li>
+            <li>Reynolds number and friction factor estimation</li>
+            <li>Cost and performance comparison of commercial components</li>
+        </ul>
+    </div>
+</section>
+
+<section class="mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <h2 class="fw-bold mb-4" data-aos="fade-up">Pump Selection</h2>
+        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+            Head availability and NPSH calculations were performed to ensure proper pump operation
+            and prevent cavitation.
+        </p>
+        <div class="row mt-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-4">
+                <h5 class="fw-bold">Available Head</h5>
+                <p class="text-muted">6.54 ft total head available from system elevation and tank geometry.</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold">NPSH Available</h5>
+                <p class="text-muted">80.5 ft, significantly exceeding required values.</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold">Selected Pump</h5>
+                <p class="text-muted">March TE-7.5P-MD magnetic drive pump.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="container">
+        <h2 class="fw-bold mb-3" data-aos="fade-up">Return Line Design</h2>
+        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+            The return line diameter was determined by evaluating velocity, head losses from
+            friction and pipe fittings, and Reynolds number assuming laminar flow conditions.
+        </p>
+        <ul class="text-muted" style="line-height:1.8;" data-aos="fade-up" data-aos-delay="200">
+            <li>Minimum required diameter: 3.125 in</li>
+            <li>Recommended sizes: 3.5–4 in schedule 40 PVC</li>
+            <li>Larger diameter reduces head loss and enables gravity-driven return flow</li>
+            <li>4-inch pipe selected for lower cost and availability</li>
+        </ul>
+    </div>
+</section>
+
+<section class="mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <h2 class="fw-bold mb-3" data-aos="fade-up">Flow Regulation Strategy</h2>
+        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+            A valve was required to regulate flow below 30 gpm while minimizing system losses.
+            Head loss analysis and flow requirements indicated that a full-width ball valve
+            provided the best balance of performance and cost.
+        </p>
+        <ul class="text-muted" data-aos="fade-up" data-aos-delay="200">
+            <li>Low friction loss coefficient</li>
+            <li>High flow capacity</li>
+            <li>Minimal maintenance and leakage</li>
+            <li>No need for fine throttling control</li>
+        </ul>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="container">
+        <h2 class="fw-bold mb-3" data-aos="fade-up">Final Design Summary</h2>
+        <div class="row text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-4">
+                <h5 class="fw-bold">Pump</h5>
+                <p class="text-muted">March TE-7.5P-MD Magnetic Drive Pump</p>
+            </div>
+
+            <div class="col-md-4">
+                <h5 class="fw-bold">Return Line</h5>
+                <p class="text-muted">4-inch Schedule 40 PVC</p>
+            </div>
+
+            <div class="col-md-4">
+                <h5 class="fw-bold">Valve</h5>
+                <p class="text-muted">Full-width ball valve</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <h2 class="fw-bold mb-3" data-aos="fade-up">Key Engineering Takeaways</h2>
+
+        <ul class="text-muted" style="line-height:1.9;" data-aos="fade-up" data-aos-delay="100">
+            <li>Applied fluid mechanics principles to real system design</li>
+            <li>Performed NPSH and cavitation analysis</li>
+            <li>Modeled pipe flow and head losses</li>
+            <li>Selected commercial components based on performance and cost</li>
+            <li>Validated engineering decisions through quantitative analysis</li>
+        </ul>
+    </div>
+</section>

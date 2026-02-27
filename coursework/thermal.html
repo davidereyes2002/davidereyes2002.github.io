@@ -1,0 +1,299 @@
+---
+layout: default
+title: Thermal Analysis | David Reyes
+custom_js: |
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            initPDFOverlay();
+        });
+
+        function initPDFOverlay() {
+            const overlay = document.getElementById('pdf-overlay');
+            const container = overlay.querySelector('.pdf-container');
+            const overlayIframe = document.getElementById('pdf-overlay-iframe');
+            const overlayCloseBtn = document.getElementById('pdf-overlay-close');
+
+            let currentPreviewRect = null; // store bounding rect of preview iframe on open
+
+            function setContainerRect(rect) {
+                container.style.top = rect.top + 'px';
+                container.style.left = rect.left + 'px';
+                container.style.width = rect.width + 'px';
+                container.style.height = rect.height + 'px';
+                container.style.borderRadius = '8px';
+            }
+
+            document.querySelectorAll('.btn-expand-pdf').forEach(button => {
+                button.addEventListener('click', () => {
+                const cardBody = button.closest('.card-body');
+                const iframe = cardBody.querySelector('iframe');
+                const rect = iframe.getBoundingClientRect();
+
+                currentPreviewRect = rect;
+
+                // Set iframe src in overlay
+                overlayIframe.src = iframe.src;
+
+                // Show overlay (remove d-none, add show)
+                overlay.classList.remove('d-none');
+                overlay.classList.add('show');
+                overlay.setAttribute('aria-hidden', 'false');
+
+                // Disable background scroll
+                document.body.style.overflow = 'hidden';
+
+                // Start container at preview iframe size and position
+                setContainerRect(rect);
+
+                // Trigger reflow then animate to full screen (centered, 90vw x 90vh)
+                requestAnimationFrame(() => {
+                    container.style.top = `50%`;
+                    container.style.left = `50%`;
+                    container.style.width = `90vw`;
+                    container.style.height = `90vh`;
+                    container.style.borderRadius = '8px';
+                    container.style.transform = 'translate(-50%, -50%)';
+                });
+                });
+            });
+
+            function closeOverlay() {
+                // Start close animation: scale down & fade container, fade overlay background
+                container.classList.add('closing');
+                overlay.classList.remove('show'); // fade overlay background opacity
+
+                overlay.setAttribute('aria-hidden', 'true');
+
+                // After animation duration (match CSS 400ms), hide and reset
+                setTimeout(() => {
+                    overlay.classList.add('d-none');
+                    overlayIframe.src = '';
+                    document.body.style.overflow = '';
+                    currentPreviewRect = null;
+
+                    // Reset container styles for next open
+                    container.classList.remove('closing');
+                    container.style.transform = 'none';
+                    container.style.top = '';
+                    container.style.left = '';
+                    container.style.width = '';
+                    container.style.height = '';
+                    container.style.borderRadius = '';
+                }, 400);
+            }
+
+            overlayCloseBtn.addEventListener('click', closeOverlay);
+
+            // Close on clicking outside container
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeOverlay();
+            });
+
+            // Close on Escape key
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('show')) {
+                closeOverlay();
+                }
+            });
+        }
+    </script>
+---
+
+<h1 class="text-center mb-5" data-aos="zoom-in-up">
+    Thermal Sciences Design and Lab
+</h1>
+
+<section class="mb-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                <h2 class="fw-bold mb-3">Overview</h2>
+                <p class="lead text-muted">
+                    Thermal Sciences Design and Laboratory (EML4147C) at the University of Florida provided advanced coverage of thermodynamics, heat transfer, and fluid dynamics through hands-on laboratory experimentation and engineering design. The course emphasized applying fundamental thermal science principles to real-world systems, including turbomachinery, pipe flow, and heat exchanger performance. Students designed, analyzed, and tested thermal-fluid systems while developing strong experimental, analytical, and technical reporting skills.
+                </p>
+
+                <h3 class="fw-bold mb-3">Key Skills</h3>
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Turbomachinery Design:</strong> Pump selection, performance analysis, system matching, and impeller design/testing.</li>
+                    <li><strong>Fluid Systems Analysis:</strong> Pipe flow characterization, pressure and head loss prediction, flow measurement.</li>
+                    <li><strong>Heat Transfer Systems:</strong> Double-pipe heat exchangers and cooling tower thermal performance evaluation.</li>
+                    <li><strong>Experimental Methods:</strong> Conducted thermodynamics, heat transfer, and fluid dynamics experiments.</li>
+                    <li><strong>Engineering Design:</strong> Designed practical thermal-fluid systems based on performance and cost considerations.</li>
+                    <li><strong>Technical Reporting:</strong> Structured lab and design reports including abstracts, results, and conclusions.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mb-5 bg-light py-5 rounded shadow-sm">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4" data-aos="fade-up">Lab Reports</h2>
+        <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="100">
+            A collection of selected thermal sciences experiments and engineering design reports.
+        </p>
+        <div class="row gy-4" id="papers-row">
+            <div class="col-lg-3 col-md-6 paper-card">
+                <div class="card h-100 shadow-sm" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Pipe Loss Experiment</h5>
+                        <p class="small text-muted">Pipe Flow & Frictional Loss Analysis</p>
+                        <p>
+                            Characterized frictional losses in a hydraulic piping system by measuring flow rate, pressure difference, and temperature using LabVIEW-based data acquisition. Calculated head loss, Reynolds number, friction factor, loss coefficients, and pipe roughness to evaluate system performance and energy losses.
+                        </p>
+                        <p class="small">
+                            <strong>Skills:</strong> Fluid system analysis, LabVIEW data acquisition, uncertainty analysis, Reynolds number calculation, head loss modeling
+                        </p>
+
+                        <div class="d-flex gap-2 mb-3 btn-small-group">
+                            <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf1">
+                                <i class="fas fa-expand me-1"></i> View Larger
+                            </button>
+                            <a href="/documents/PipeLossReport.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Pipe Loss Experiment PDF in new window">
+                                <i class="fas fa-up-right-from-square"></i> Open New Window
+                            </a>
+                        </div>
+
+                        <div class="pdf-wrapper mx-auto" id="pdf1">
+                            <iframe 
+                                src="/documents/PipeLossReport.pdf" 
+                                title="Pipe Loss Experiment PDF"
+                                width="100%" 
+                                height="300" 
+                                style="border: none;"
+                                loading="lazy">
+                            </iframe>
+
+                            <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 paper-card">
+                <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Fan Performance Experiment</h5>
+                        <p class="small text-muted">Centrifugal Pump & Impeller Performance Analysis</p>
+                        <p>
+                            Evaluated centrifugal fan performance by analyzing backward-inclined and radial impeller designs. Measured pressure and flow parameters using VDAS data acquisition to calculate head rise, efficiency, and operating cost for fan sizing and system optimization.
+                        </p>
+                        <p class="small">
+                            <strong>Skills:</strong> Turbomachinery analysis, pump performance evaluation, data acquisition, efficiency analysis, fluid system optimization
+                        </p>
+
+                        <div class="d-flex gap-2 mb-3 btn-small-group">
+                            <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf2">
+                                <i class="fas fa-expand me-1"></i> View Larger
+                            </button>
+                            <a href="/documents/FanPerformanceReport.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Fan Performance Experiment PDF in new window">
+                                <i class="fas fa-up-right-from-square"></i> Open New Window
+                            </a>
+                        </div>
+
+                        <div class="pdf-wrapper mx-auto" id="pdf2">
+                            <iframe 
+                                src="/documents/FanPerformanceReport.pdf" 
+                                title="Fan Performance Experiment PDF"
+                                width="100%" 
+                                height="300" 
+                                style="border: none;"
+                                loading="lazy">
+                            </iframe>
+
+                            <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 paper-card">
+                <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Heat Exchanger Analysis</h5>
+                        <p class="small text-muted">Heat Transfer Performance & LMTD Evaluation</p>
+                        <p>
+                            Evaluated the performance of a double pipe heat exchanger under parallel and counterflow configurations by calculating LMTD, overall heat transfer coefficient (UA), and fouling factors. Analyzed internal flow properties and compared experimental and theoretical heat transfer results.
+                        </p>
+                        <p class="small">
+                            <strong>Skills:</strong> Heat transfer analysis, LMTD evaluation, thermal system performance testing, data acquisition with LabVIEW, uncertainty analysis
+                        </p>
+
+                        <div class="d-flex gap-2 mb-3 btn-small-group">
+                            <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf3">
+                                <i class="fas fa-expand me-1"></i> View Larger
+                            </button>
+                            <a href="/documents/HeatExchangerReport.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Double Pipe Heat Exchanger PDF in new window">
+                                <i class="fas fa-up-right-from-square"></i> Open New Window
+                            </a>
+                        </div>
+
+                        <div class="pdf-wrapper mx-auto" id="pdf3">
+                            <iframe 
+                                src="/documents/HeatExchangerReport.pdf" 
+                                title="Double Pipe Heat Exchanger Analysis PDF"
+                                width="100%" 
+                                height="300" 
+                                style="border: none;"
+                                loading="lazy">
+                            </iframe>
+
+                            <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 paper-card">
+                <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Cooling Tower Analysis</h5>
+                        <p class="small text-muted">Mass & Energy Balance Evaluation</p>
+                        <p>
+                            Characterized cooling tower performance using mass and energy balances by analyzing air and water temperature data. Determined heat dissipation rates, humidity properties, and cooling effectiveness across multiple operating conditions and compared experimental results with theoretical predictions.
+                        </p>
+                        <p class="small">
+                            <strong>Skills:</strong> Mass and energy balance analysis, heat transfer evaluation, thermodynamic property analysis, experimental data acquisition, uncertainty comparison
+                        </p>
+
+                        <div class="d-flex gap-2 mb-3 btn-small-group">
+                            <button class="btn btn-primary flex-grow-1 btn-expand-pdf" type="button" aria-expanded="false" aria-controls="pdf4">
+                                <i class="fas fa-expand me-1"></i> View Larger
+                            </button>
+                            <a href="/documents/CoolingTowerReport.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary flex-grow-1" aria-label="Open Cooling Tower Performance Analysis PDF in new window">
+                                <i class="fas fa-up-right-from-square"></i> Open New Window
+                            </a>
+                        </div>
+
+                        <div class="pdf-wrapper mx-auto" id="pdf4">
+                            <iframe 
+                                src="/documents/CoolingTowerReport.pdf" 
+                                title="Cooling Tower Performance Analysis PDF"
+                                width="100%" 
+                                height="300" 
+                                style="border: none;"
+                                loading="lazy">
+                            </iframe>
+
+                            <button class="btn btn-danger btn-close-pdf d-none" aria-label="Close PDF">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="pdf-overlay" class="pdf-overlay d-none" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="pdf-overlay-content">
+        <div class="pdf-container">
+            <button id="pdf-overlay-close" class="btn btn-danger btn-close-pdf" aria-label="Close PDF">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="pdf-overlay-iframe" src="" frameborder="0" loading="lazy" title="Expanded PDF"></iframe>
+        </div>
+    </div>
+</div>
