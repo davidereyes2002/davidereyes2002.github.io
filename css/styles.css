@@ -514,11 +514,12 @@ footer .icon-btn:hover {
   animation-name: wipe-left;
 }
 
-.carousel-subcaption {
-  position: static;      /* ensure it's not absolutely positioned */
-  display: block;
-  opacity: 1;            /* explicit default */
-  transition: opacity 0.4s ease;
+.carousel-subcaption{
+    min-height:3em;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 }
 
 .fade-out { opacity: 0; }
@@ -786,19 +787,28 @@ footer .icon-btn:hover {
 
 .week-deck {
   position: relative;
-  flex: 1 1 600px; /* flex grows, min width for two-col */
+  flex: 1 1 600px;
   min-width: 300px;
   perspective: 1200px;
-  overflow: visible;   /* allow content to expand */
-  height: auto;        /* let JS resize it */
-  transition: height 0.5s ease; /* smooth resizing */
+  overflow: visible;
+  height: 600px; /* temporary initial space */
+  transition: height 0.5s ease;
+  max-width: 100%;
+}
+
+.week-deck.loading .week-card {
+  visibility: hidden;
+}
+
+.week-deck.ready .week-card {
+  visibility: visible;
 }
 
 .week-card {
   position: absolute;
   width: 100%;
   height: auto;        /* adapt to content */
-  min-height: 100%;    /* ensures tall enough for inner flex */
+  min-height: auto;    /* ensures tall enough for inner flex */
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 12px 28px rgba(0,0,0,0.15);
@@ -812,6 +822,7 @@ footer .icon-btn:hover {
 
   display: flex;
   flex-direction: column; /* so we can push progress down */
+  box-sizing: border-box;
 }
 
 /* Active card */

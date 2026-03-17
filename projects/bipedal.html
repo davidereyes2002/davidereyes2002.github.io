@@ -148,18 +148,35 @@ custom_js: |
             new Carousel(carouselEl);
         });
 
-        window.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener("load", () => {
             initWeekDeck();
+
+            const deck = document.querySelector(".week-deck");
+
             resizeDeckToActive();
+
+            deck.classList.remove("loading");
+            deck.classList.add("ready");
         });
 
         function scrollToActiveCard() {
             const activeCard = document.querySelector(".week-card.active");
-            if (activeCard) {
-                const cardTop = activeCard.getBoundingClientRect().top + window.scrollY;
-                const offset = window.innerHeight * 0.15;
+            if (!activeCard) return;
+
+            const rect = activeCard.getBoundingClientRect();
+
+            const topThreshold = 100;   // space from top
+            const bottomThreshold = window.innerHeight - 100;
+
+            const isAbove = rect.top < topThreshold;
+            const isBelow = rect.bottom > bottomThreshold;
+
+            // Only scroll if it's out of the "comfortable view zone"
+            if (isAbove || isBelow) {
+                const y = rect.top + window.scrollY - 80;
+
                 window.scrollTo({
-                    top: cardTop - offset,
+                    top: y,
                     behavior: "smooth"
                 });
             }
@@ -199,8 +216,10 @@ custom_js: |
 
                 currentIndex = targetIndex;
 
+                setTimeout(resizeDeckToActive, 50);
+
                 if (scroll) {
-                    scrollToActiveCard();
+                    setTimeout(scrollToActiveCard, 250);
                 }
             }
 
@@ -221,10 +240,12 @@ custom_js: |
 
         function resizeDeckToActive() {
             const deck = document.querySelector(".week-deck");
-            const activeCard = deck.querySelector(".week-card.active");
-            if (activeCard) {
-                deck.style.height = activeCard.offsetHeight + "px";
-            }
+            const activeCard = deck?.querySelector(".week-card.active");
+
+            if (!deck || !activeCard) return;
+
+            const height = activeCard.scrollHeight;
+            deck.style.height = height + "px";
         }
 
         function setActiveCard(week) {
@@ -257,12 +278,12 @@ custom_js: |
     </div>
 </section>
 
-<section class="week-deck-section mb-5 bg-light py-5 rounded shadow-sm">
+<section class="mb-5 bg-light py-5 rounded shadow-sm" data-aos="zoom-in-up">
     <div class="container">
         <h1 class="section-title">Development Timeline</h1>
     </div>
     <div class="container week-deck-wrapper">
-        <div class="week-deck">
+        <div class="week-deck loading">
             <div class="week-card" data-week="1">
                 <div class="week-card-inner">
                     <div class="row align-items-center">
