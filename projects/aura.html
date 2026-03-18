@@ -8,9 +8,9 @@ custom_js: |
             const cards = document.querySelectorAll(".feature-card");
 
             if (stage && cards.length) {
-                const EXPAND_DURATION = 1400;
+                const EXPAND_DURATION = 1000;
                 const HOLD_DURATION = 7000;
-                const COLLAPSE_DURATION = 1200;
+                const COLLAPSE_DURATION = 800;
                 const INACTIVITY_RESET = 30000;
                 const CONTENT_REVEAL_DELAY = EXPAND_DURATION * 0.65;
 
@@ -20,6 +20,7 @@ custom_js: |
                 let inactivityTimer;
                 let activeClone = null;
                 let activeOriginal = null;
+                let isAnimating = false;
 
                 function getRelativeRect(el, parent) {
                     const r1 = el.getBoundingClientRect();
@@ -45,6 +46,7 @@ custom_js: |
                 function expandCard(original) {
                     if (activeClone) return;
 
+                    isAnimating = true;
                     activeOriginal = original;
 
                     original.offsetHeight;
@@ -83,6 +85,10 @@ custom_js: |
 
                     revealContent(clone);
 
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, EXPAND_DURATION);
+
                     clone.querySelector(".card-minimize")?.addEventListener("click", e => {
                         e.stopPropagation();
 
@@ -95,6 +101,8 @@ custom_js: |
 
                 function collapseCard() {
                     if (!activeClone || !activeOriginal) return;
+
+                    isAnimating = true;
 
                     hideContent(activeClone);
 
@@ -113,6 +121,8 @@ custom_js: |
 
                         activeClone = null;
                         activeOriginal = null;
+
+                        isAnimating = false;
 
                     }, COLLAPSE_DURATION);
                 }
@@ -163,11 +173,15 @@ custom_js: |
                         if (activeOriginal === card) {
                             collapseCard();
                         } else {
-                            if (activeClone) collapseCard();
+                            if (activeClone) {
+                                collapseCard();
 
-                            setTimeout(() => {
+                                setTimeout(() => {
+                                    expandCard(card);
+                                }, COLLAPSE_DURATION);
+                            } else {
                                 expandCard(card);
-                            }, 200);
+                            }
                         }
 
                         resetInactivity();
@@ -181,6 +195,24 @@ custom_js: |
                 }
 
                 startAuto();
+            }
+
+            const capabilities = document.querySelectorAll(".aura-capabilities .capability");
+
+            if (capabilities.length) {
+
+                let capIndex = 0;
+
+                setInterval(() => {
+
+                    capabilities[capIndex].classList.remove("active");
+
+                    capIndex = (capIndex + 1) % capabilities.length;
+
+                    capabilities[capIndex].classList.add("active");
+
+                }, 3000);
+
             }
 
             const circle = document.querySelector(".architecture-circle");
@@ -313,23 +345,6 @@ custom_js: |
                 flow.style.zIndex = "1";
             }
 
-            const capabilities = document.querySelectorAll(".aura-capabilities .capability");
-
-            if (capabilities.length) {
-
-                let capIndex = 0;
-
-                setInterval(() => {
-
-                    capabilities[capIndex].classList.remove("active");
-
-                    capIndex = (capIndex + 1) % capabilities.length;
-
-                    capabilities[capIndex].classList.add("active");
-
-                }, 3000);
-
-            }
         });
 
         class Carousel {
