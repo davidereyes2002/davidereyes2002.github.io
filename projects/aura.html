@@ -231,29 +231,6 @@ custom_js: |
                     }
                 };
 
-                function positionNodes() {
-                    const rect = circle.getBoundingClientRect();
-
-                    const radius = rect.width / 2 - 60;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-
-                    nodes.forEach((node, i) => {
-                        const angle = (-90 + i * 120) * Math.PI / 180;
-
-                        const x = centerX + radius * Math.cos(angle);
-                        const y = centerY + radius * Math.sin(angle);
-
-                        node.style.left = x + "px";
-                        node.style.top = y + "px";
-                        node.style.transform = "translate(-50%, -50%)";
-                        node.style.zIndex = "5";
-
-                    });
-                }
-
-                positionNodes();
-                window.addEventListener("resize", positionNodes);
                 let index = 0;
 
                 function activate(node) {
@@ -962,21 +939,17 @@ custom_js: |
                                 <div class="architecture-circle">
                                     <div class="circle-core"></div>
 
-                                    <div class="arch-node node-device" data-node="device">
-                                        <span>ESP32</span>
+                                    <div class="orbit-track">
+                                        <div class="arch-node node-device" data-node="device">
+                                            <span>ESP32</span>
+                                        </div>
+                                        <div class="arch-node node-backend" data-node="backend">
+                                            <span>Backend</span>
+                                        </div>
+                                        <div class="arch-node node-model" data-node="model">
+                                            <span>ML Model</span>
+                                        </div>
                                     </div>
-
-                                    <div class="arch-node node-backend" data-node="backend">
-                                        <span>Backend</span>
-                                    </div>
-
-                                    <div class="arch-node node-model" data-node="model">
-                                        <span>ML Model</span>
-                                    </div>
-
-                                    <svg class="circle-flow" viewBox="0 0 400 400">
-                                        <circle cx="200" cy="200" r="150" class="flow-ring"/>
-                                    </svg>
                                 </div>
                             </div>
                         </div>

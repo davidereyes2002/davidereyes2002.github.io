@@ -1546,108 +1546,143 @@ ARCHITECTURE SECTION
 }
 
 /* ================================
-LAYOUT
+ROOT VARIABLES
 ================================ */
-
-.architecture-container{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:100px;
-  flex-wrap:wrap;
+:root{
+  --core-size:120px;
+  --node-size:100px;
+  --orbit-radius:140px;
+  --rotation-speed:20s;
 }
 
 /* ================================
-CIRCLE DIAGRAM
+CENTERING INSIDE col-md-6
 ================================ */
-
-.architecture-circle{
-  position:relative;
-  width:420px;
-  height:420px;
+.architecture-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
 }
 
-/* center core */
+/* ================================
+MAIN CIRCLE
+================================ */
+.architecture-circle{
+  position:relative;
+  width:400px;
+  height:400px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
+/* ================================
+CORE
+================================ */
 .circle-core{
   position:absolute;
-  width:120px;
-  height:120px;
+  width:var(--core-size);
+  height:var(--core-size);
   border-radius:50%;
-  background:rgba(255,255,255,.9);
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  box-shadow:0 40px 100px rgba(0,0,0,.1);
-  z-index:2;
+
+  background:rgba(255,255,255,.95);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-weight:600;
+  color:#1e293b;
+
+  box-shadow:0 20px 60px rgba(0,0,0,.1);
+  z-index:10;
+}
+
+/* ================================
+ROTATING ORBIT RING
+================================ */
+.orbit-track{
+  position:absolute;
+  width:calc(var(--orbit-radius) * 2);
+  height:calc(var(--orbit-radius) * 2);
+
+  border-radius:50%;
+  border:2px dashed rgba(37,99,235,.4);
+
+  animation:rotate var(--rotation-speed) linear infinite;
 }
 
 /* ================================
 NODES
 ================================ */
-
 .arch-node{
   position:absolute;
-  top:50%;
-  left:50%;
 
-  width:110px;
-  height:110px;
+  width:var(--node-size);
+  height:var(--node-size);
   border-radius:50%;
 
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   background:white;
   border:1px solid rgba(0,0,0,.06);
   box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+  top:50%;
+  left:50%;
+
+  margin-top:calc(var(--node-size) / -2);
+  margin-left:calc(var(--node-size) / -2);
+
   cursor:pointer;
-
-  z-index:5;
-
-  transform: translate(-50%, -50%);
 }
 
-:root{
-  --circle-radius: 150px;
-}
-
+/* PERFECT TRIANGLE (same as working code) */
 .node-device{
-  transform: translate(-50%, -50%) rotate(0deg) translateY(calc(-1 * var(--circle-radius)));
+  transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
 }
 
 .node-backend{
-  transform: translate(-50%, -50%) rotate(120deg) translateY(calc(-1 * var(--circle-radius)));
+  transform: rotate(120deg) translate(var(--orbit-radius)) rotate(-120deg);
 }
 
 .node-model{
-  transform: translate(-50%, -50%) rotate(240deg) translateY(calc(-1 * var(--circle-radius)));
+  transform: rotate(240deg) translate(var(--orbit-radius)) rotate(-240deg);
 }
 
-@media(max-width:900px){
-
-  :root{
-    --circle-radius: 110px; /* smaller circle */
-  }
-
-}
-
+/* ================================
+TEXT STAYS UPRIGHT
+================================ */
 .arch-node span{
   font-weight:600;
   color:#1e293b;
-  transition:color .35s ease;
+  animation:counterRotate var(--rotation-speed) linear infinite;
 }
 
-/* subtle hover only (no movement beyond small scale) */
+/* ================================
+ANIMATIONS
+================================ */
+@keyframes rotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+@keyframes counterRotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(-360deg); }
+}
+
+/* ================================
+HOVER + ACTIVE
+================================ */
 .arch-node:hover{
-  transform:translate(-50%, -50%) scale(1.05);
+  scale:1.05;
 }
-
-/* ===== ACTIVE NODE — SOFT COLOR HIGHLIGHT ===== */
 
 .arch-node.active{
-  background:#eff6ff; /* soft blue */
+  background:#eff6ff;
   border:1px solid rgba(37,99,235,.25);
   box-shadow:0 30px 90px rgba(37,99,235,.25);
 }
@@ -1657,30 +1692,20 @@ NODES
 }
 
 /* ================================
-FLOW ANIMATION (ROTATING RING)
+RESPONSIVE
 ================================ */
+@media(max-width:900px){
 
-.circle-flow{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:1; /* always behind nodes */
-}
+  :root{
+    --orbit-radius:100px;
+    --node-size:70px;
+    --core-size:90px;
+  }
 
-.flow-ring{
-  fill:none;
-  stroke:#2563eb;
-  stroke-width:3;
-  stroke-dasharray:12;
-  opacity:.4;
-
-  transform-origin:50% 50%;
-  animation:spinFlow 20s linear infinite;
-}
-
-@keyframes spinFlow{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+  .architecture-circle{
+    width:300px;
+    height:300px;
+  }
 }
 
 /* ================================
@@ -1709,33 +1734,6 @@ INFO PANEL
   margin:0;
   padding-left:18px;
   color:#475569;
-}
-
-/* ================================
-RESPONSIVE
-================================ */
-
-@media(max-width:900px){
-
-  .architecture-container{
-    flex-direction:column;
-    gap:60px;
-  }
-
-  .architecture-circle{
-    width:320px;
-    height:320px;
-  }
-
-  .arch-node{
-    width:80px;
-    height:80px;
-    font-size:.9rem;
-  }
-
-  .architecture-info{
-    width:100%;
-  }
 }
 
 .info-content{
