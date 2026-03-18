@@ -1,0 +1,1272 @@
+---
+layout: default
+title: AURA | David Reyes
+custom_js: |
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const stage = document.querySelector(".capabilities-stage");
+            const cards = document.querySelectorAll(".feature-card");
+
+            if (stage && cards.length) {
+                const EXPAND_DURATION = 1400;
+                const HOLD_DURATION = 7000;
+                const COLLAPSE_DURATION = 1200;
+                const INACTIVITY_RESET = 30000;
+                const CONTENT_REVEAL_DELAY = EXPAND_DURATION * 0.65;
+
+                let current = 0;
+                let autoMode = true;
+                let cycleTimer;
+                let inactivityTimer;
+                let activeClone = null;
+                let activeOriginal = null;
+
+                function getRelativeRect(el, parent) {
+                    const r1 = el.getBoundingClientRect();
+                    const r2 = parent.getBoundingClientRect();
+                    return {
+                        top: r1.top - r2.top,
+                        left: r1.left - r2.left,
+                        width: r1.width,
+                        height: r1.height
+                    };
+                }
+
+                function revealContent(card) {
+                    setTimeout(() => {
+                        card.classList.add("content-visible");
+                    }, CONTENT_REVEAL_DELAY);
+                }
+
+                function hideContent(card) {
+                    card.classList.remove("content-visible");
+                }
+
+                function expandCard(original) {
+                    if (activeClone) return;
+
+                    activeOriginal = original;
+
+                    original.offsetHeight;
+                    stage.offsetHeight;
+
+                    const start = getRelativeRect(original, stage);
+                    const clone = original.cloneNode(true);
+
+                    clone.classList.add("feature-card-clone");
+                    clone.classList.remove("content-visible");
+
+                    Object.assign(clone.style, {
+                        position: "absolute",
+                        top: start.top + "px",
+                        left: start.left + "px",
+                        width: start.width + "px",
+                        height: start.height + "px",
+                        margin: "0",
+                        zIndex: "20"
+                    });
+
+                    stage.appendChild(clone);
+                    original.classList.add("placeholder");
+
+                    requestAnimationFrame(() => {
+                        clone.style.transition = `all ${EXPAND_DURATION}ms ease`;
+
+                        clone.style.top = "0px";
+                        clone.style.left = "0px";
+                        clone.style.width = stage.clientWidth + "px";
+                        clone.style.height = stage.clientHeight + "px";
+
+                    });
+
+                    activeClone = clone;
+
+                    revealContent(clone);
+
+                    clone.querySelector(".card-minimize")?.addEventListener("click", e => {
+                        e.stopPropagation();
+
+                        stopAuto();
+                        collapseCard();
+                        resetInactivity();
+
+                    });
+                }
+
+                function collapseCard() {
+                    if (!activeClone || !activeOriginal) return;
+
+                    hideContent(activeClone);
+
+                    const end = getRelativeRect(activeOriginal, stage);
+
+                    activeClone.style.transition = `all ${COLLAPSE_DURATION}ms ease`;
+
+                    activeClone.style.top = end.top + "px";
+                    activeClone.style.left = end.left + "px";
+                    activeClone.style.width = end.width + "px";
+                    activeClone.style.height = end.height + "px";
+
+                    setTimeout(() => {
+                        activeClone.remove();
+                        activeOriginal.classList.remove("placeholder");
+
+                        activeClone = null;
+                        activeOriginal = null;
+
+                    }, COLLAPSE_DURATION);
+                }
+
+                function runCycle() {
+                    if (!autoMode) return;
+
+                    setTimeout(() => {
+                        expandCard(cards[current]);
+                    }, 50);
+
+                    cycleTimer = setTimeout(() => {
+                        collapseCard();
+
+                        setTimeout(() => {
+                            current = (current + 1) % cards.length;
+
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    runCycle();
+                                });
+                            });
+
+                        }, COLLAPSE_DURATION);
+
+                    }, EXPAND_DURATION + HOLD_DURATION);
+                }
+
+                function startAuto() {
+                    autoMode = true;
+
+                    clearTimeout(cycleTimer);
+
+                    runCycle();
+                }
+
+                function stopAuto() {
+                    autoMode = false;
+
+                    clearTimeout(cycleTimer);
+                }
+
+                cards.forEach(card => {
+                    card.addEventListener("click", () => {
+
+                        stopAuto();
+
+                        if (activeOriginal === card) {
+                            collapseCard();
+                        } else {
+                            if (activeClone) collapseCard();
+
+                            setTimeout(() => {
+                                expandCard(card);
+                            }, 200);
+                        }
+
+                        resetInactivity();
+                    });
+                });
+
+                function resetInactivity() {
+                    clearTimeout(inactivityTimer);
+
+                    inactivityTimer = setTimeout(startAuto, INACTIVITY_RESET);
+                }
+
+                startAuto();
+            }
+
+            const circle = document.querySelector(".architecture-circle");
+            const nodes = document.querySelectorAll(".architecture-circle .arch-node");
+            const info = document.querySelector(".info-content");
+            const infoPanel = document.querySelector(".architecture-info");
+            
+            let nodeSwitchingTimer = null;   // must be let
+            let autoTimer = null;            // timer for automatic switching
+
+            if (circle && nodes.length && info) {
+                const content = {
+
+                    device: {
+                        title: "ESP32 Device",
+                        html: `
+                        <ul>
+                            <li>Sensor acquisition (light, sound, motion)</li>
+                            <li>Local state + alarm logic</li>
+                            <li>OLED interface + buttons</li>
+                            <li>Wi-Fi communication</li>
+                            <li>Real-time device control</li>
+                        </ul>`
+                    },
+
+                    backend: {
+                        title: "Backend Server",
+                        html: `
+                        <ul>
+                            <li>Receives labeled sensor data</li>
+                            <li>Dataset storage</li>
+                            <li>Training pipeline</li>
+                            <li>Flask REST API</li>
+                            <li>Inference requests</li>
+                        </ul>`
+                    },
+
+                    model: {
+                        title: "Machine Learning Model",
+                        html: `
+                        <ul>
+                            <li>MLP classifier</li>
+                            <li>Learns temporal sensor patterns</li>
+                            <li>Predicts user state</li>
+                            <li>Adaptive learning</li>
+                            <li>Real-time inference</li>
+                        </ul>`
+                    }
+                };
+
+                function positionNodes() {
+                    const rect = circle.getBoundingClientRect();
+
+                    const radius = rect.width / 2 - 60;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    nodes.forEach((node, i) => {
+                        const angle = (-90 + i * 120) * Math.PI / 180;
+
+                        const x = centerX + radius * Math.cos(angle);
+                        const y = centerY + radius * Math.sin(angle);
+
+                        node.style.left = x + "px";
+                        node.style.top = y + "px";
+                        node.style.transform = "translate(-50%, -50%)";
+                        node.style.zIndex = "5";
+
+                    });
+                }
+
+                positionNodes();
+                window.addEventListener("resize", positionNodes);
+                let index = 0;
+
+                function activate(node) {
+                    nodes.forEach(n => n.classList.remove("active"));
+                    node.classList.add("active");
+
+                    const key = node.dataset.node;
+
+                    info.classList.add("fade-out");
+
+                    clearTimeout(nodeSwitchingTimer);
+
+                    nodeSwitchingTimer = setTimeout(() => {
+                        info.innerHTML = `
+                            <h3>${content[key].title}</h3>
+                            ${content[key].html}
+                        `;
+
+                        info.classList.remove("fade-out");
+
+                    }, 200);
+                }
+
+                function scheduleNextSwitch() {
+
+                    clearTimeout(autoTimer);
+
+                    autoTimer = setTimeout(() => {
+
+                        index = (index + 1) % nodes.length;
+
+                        activate(nodes[index]);
+
+                        scheduleNextSwitch(); // recursive restart
+
+                    }, 4000);
+                }
+
+                nodes.forEach((node, i) => {
+                    node.addEventListener("click", () => {
+                        index = i;
+                        activate(node);
+                        scheduleNextSwitch();
+                    });
+                });
+
+                activate(nodes[0]);
+                scheduleNextSwitch();
+
+                function checkOverlap() {
+                    if (!infoPanel) return;
+
+                    const panelRect = infoPanel.getBoundingClientRect();
+
+                    nodes.forEach(node => {
+                        const r = node.getBoundingClientRect();
+
+                        const overlap =
+                            !(panelRect.right < r.left ||
+                            panelRect.left > r.right ||
+                            panelRect.bottom < r.top ||
+                            panelRect.top > r.bottom);
+
+                        if (overlap) {
+                            node.classList.add("active");
+                        }
+
+                    });
+                }
+
+                window.addEventListener("scroll", checkOverlap);
+                window.addEventListener("resize", checkOverlap);
+
+                setInterval(checkOverlap, 200);
+            }
+
+            const flow = document.querySelector(".circle-flow");
+
+            if (flow) {
+                flow.style.zIndex = "1";
+            }
+
+            const capabilities = document.querySelectorAll(".aura-capabilities .capability");
+
+            if (capabilities.length) {
+
+                let capIndex = 0;
+
+                setInterval(() => {
+
+                    capabilities[capIndex].classList.remove("active");
+
+                    capIndex = (capIndex + 1) % capabilities.length;
+
+                    capabilities[capIndex].classList.add("active");
+
+                }, 3000);
+
+            }
+        });
+
+        class Carousel {
+            constructor(carouselElement) {
+                this.carouselElement = carouselElement;
+                this.imageElements = Array.from(carouselElement.querySelectorAll('.carousel-img'));
+                this.captionElement = carouselElement.querySelector('.carousel-subcaption');
+
+                this.currentIndex = 0;
+                this.timer = null;
+                this.locked = false;
+                this.isPaused = false;
+
+                this.captionFadeOutT = null;
+                this.captionFadeInT = null;
+
+                this.prevButton = document.querySelector(`.prev-btn[data-target="${this.id}"]`);
+                this.nextButton = document.querySelector(`.next-btn[data-target="${this.id}"]`);
+
+                this.prevButton.addEventListener('click', () => this.prev());
+                this.nextButton.addEventListener('click', () => this.next());
+
+                this.createPauseButton();
+
+                this.setCaption(this.currentIndex, false);
+
+                this.startAutoplay();
+            }
+
+            get id() {
+                return this.carouselElement.dataset.id;
+            }
+
+            createPauseButton() {
+                const container = this.carouselElement.querySelector('.carousel-container');
+
+                if (container.querySelector('.pause-btn')) return;
+
+                this.pauseButton = document.createElement('button');
+                this.pauseButton.className = 'carousel-btn pause-btn';
+                this.pauseButton.setAttribute('data-target', this.id);
+                this.pauseButton.textContent = "❚❚";
+
+                this.pauseButton.addEventListener('click', () => this.togglePause());
+                container.appendChild(this.pauseButton);
+            }
+
+            togglePause() {
+                this.isPaused = !this.isPaused;
+
+                if (this.isPaused) {
+                    clearInterval(this.timer);
+                    this.pauseButton.textContent = "▶";
+                } else {
+                    this.startAutoplay();
+                    this.pauseButton.textContent = "❚❚";
+                }
+            }
+
+            showImage(newIndex, direction) {
+                if (this.locked || newIndex === this.currentIndex) return;
+
+                this.locked = true;
+                const currentImg = this.imageElements[this.currentIndex];
+                const nextImg = this.imageElements[newIndex];
+
+                this.imageElements.forEach(img =>
+                    img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
+                );
+
+                currentImg.classList.add('active');
+
+                nextImg.classList.add('wipe');
+                nextImg.classList.add(direction === 'next' ? 'wipe-right' : 'wipe-left');
+
+                this.setCaption(newIndex, true); 
+
+                setTimeout(() => {
+                    this.imageElements.forEach(img =>
+                        img.classList.remove('active', 'wipe', 'wipe-right', 'wipe-left')
+                    );
+                    nextImg.classList.add('active');
+                    this.currentIndex = newIndex;
+                    this.locked = false;
+                }, 850);
+
+                if (!this.isPaused) this.resetAutoplay();
+            }
+
+            setCaption(newIndex, animate = true) {
+                if (!this.captionElement) return;
+
+                const newCaption =
+                    this.imageElements[newIndex].dataset.caption ||
+                    this.imageElements[newIndex].alt ||
+                    '';
+
+                clearTimeout(this.captionFadeOutT);
+                clearTimeout(this.captionFadeInT);
+
+                if (!animate) {
+                    this.captionElement.textContent = newCaption;
+                    this.captionElement.classList.remove('fade-out', 'fade-in');
+                    return;
+                }
+
+                this.captionElement.classList.add('fade-out');
+
+                this.captionFadeOutT = setTimeout(() => {
+                    this.captionElement.textContent = newCaption;
+                    this.captionElement.classList.remove('fade-out');
+                    this.captionElement.classList.add('fade-in');
+
+                    this.captionFadeInT = setTimeout(() => {
+                        this.captionElement.classList.remove('fade-in'); // return to normal opacity
+                    }, 400);
+                }, 300);
+            }
+
+            next() {
+                const newIndex = (this.currentIndex + 1) % this.imageElements.length;
+                this.showImage(newIndex, 'next');
+            }
+
+            prev() {
+                const newIndex = (this.currentIndex - 1 + this.imageElements.length) % this.imageElements.length;
+                this.showImage(newIndex, 'prev');
+            }
+
+            startAutoplay() {
+                clearInterval(this.timer);
+                this.timer = setInterval(() => {
+                    if (!this.isPaused) this.next();
+                }, 5000);
+            }
+
+            resetAutoplay() {
+                if (this.isPaused) return;
+                clearInterval(this.timer);
+                this.startAutoplay();
+            }
+        }
+
+        document.querySelectorAll('.carousel').forEach(carouselEl => {
+            new Carousel(carouselEl);
+        });
+
+        window.addEventListener("load", () => {
+            initEngDeck();
+
+            const deck = document.querySelector(".eng-deck");
+
+            resizeDeckToActive();
+
+            deck.classList.remove("loading");
+            deck.classList.add("ready");
+        });
+
+        function scrollToActiveCard() {
+            const activeCard = document.querySelector(".eng-card.active");
+            if (!activeCard) return;
+
+            const rect = activeCard.getBoundingClientRect();
+
+            const topThreshold = 100;   // space from top
+            const bottomThreshold = window.innerHeight - 100;
+
+            const isAbove = rect.top < topThreshold;
+            const isBelow = rect.bottom > bottomThreshold;
+
+            // Only scroll if it's out of the "comfortable view zone"
+            if (isAbove || isBelow) {
+                const y = rect.top + window.scrollY - 80;
+
+                window.scrollTo({
+                    top: y,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        function initEngDeck() { 
+            const cards = document.querySelectorAll(".eng-card");
+            const prevBtn = document.querySelector(".eng-prev-btn");
+            const nextBtn = document.querySelector(".eng-next-btn");
+            const indicators = document.querySelectorAll(".eng-indicators span");
+
+            if (!cards.length) return;
+
+            let currentIndex = 0;
+
+            function updateDeck(targetIndex, { scroll = false } = {}) {
+                const forward = targetIndex > currentIndex;
+
+                cards.forEach((card, i) => {
+                    card.classList.remove("active", "before", "after");
+
+                    if (i === targetIndex) {
+                        card.classList.add("active");
+                    } else if (i < targetIndex) {
+                        card.classList.add("before");
+                    } else {
+                        card.classList.add("after");
+                    }
+                });
+
+                indicators.forEach((ind, i) => {
+                    ind.classList.toggle("active", i === targetIndex);
+                });
+
+                prevBtn.disabled = targetIndex === 0;
+                nextBtn.disabled = targetIndex === cards.length - 1;
+
+                currentIndex = targetIndex;
+
+                setTimeout(resizeDeckToActive, 50);
+
+                if (scroll) {
+                    setTimeout(scrollToActiveCard, 250);
+                }
+            }
+
+            prevBtn?.addEventListener("click", () => {
+                if (currentIndex > 0) updateDeck(currentIndex - 1, { scroll: true });
+            });
+
+            nextBtn?.addEventListener("click", () => {
+                if (currentIndex < cards.length - 1) updateDeck(currentIndex + 1, { scroll: true });
+            });
+
+            indicators.forEach((ind, i) => {
+                ind.addEventListener("click", () => updateDeck(i, { scroll: true }));
+            });
+
+            updateDeck(0, { scroll: false });
+        }
+
+        function resizeDeckToActive() {
+            const deck = document.querySelector(".eng-deck");
+            const activeCard = deck?.querySelector(".eng-card.active");
+
+            if (!deck || !activeCard) return;
+
+            const height = activeCard.scrollHeight;
+            deck.style.height = height + "px";
+        }
+
+        function setActiveCard(week) {
+            document.querySelectorAll(".eng-card").forEach(card => {
+                card.classList.remove("active", "before", "after");
+            });
+            const active = document.querySelector(`.eng-card[data-step="${week}"]`);
+            if (active) {
+                active.classList.add("active");
+                resizeDeckToActive();
+            }
+        }
+
+        window.addEventListener("resize", resizeDeckToActive);
+    </script>
+---
+
+<h1 class="text-center mb-5" data-aos="zoom-in-up">Adaptive User Room Assistant (AURA)</h1>
+<section class="mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto">
+            <div class="bg-light p-4 rounded shadow-sm" data-aos="fade-up">
+                <h2 class="fw-bold mb-3">Project Overview</h2>
+                <p class="lead text-muted">
+                    AURA is an intelligent AIoT device designed to monitor environmental 
+                    and behavioral cues such as brightness, sound, motion, and posture to understand and adapt to user 
+                    activities including studying, relaxing, sleeping, or being away. The system integrates low-cost 
+                    sensors, embedded intelligence, and lightweight AI models to create a personalized and context-aware 
+                    smart environment.
+                </p>
+                <p class="lead text-muted">
+                    The project demonstrates how adaptive technology can enhance productivity, encourage ergonomic behavior, 
+                    and support user well-being by responding dynamically to real-time conditions. AURA highlights the 
+                    potential of AIoT technologies to transform passive living spaces into responsive, interactive systems 
+                    that continuously learn from user behavior and provide meaningful feedback.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="aura-split rounded shadow-sm" data-aos="zoom-in-up">
+    <div class="aura-hero-side">
+        <div class="aura-panel aura-panel-center">
+            <div class="aura-device-wrapper">
+                <div class="aura-device">
+                    <div class="aura-core"></div>
+                    <div class="signal-ring ring1"></div>
+                    <div class="signal-ring ring2"></div>
+                    <div class="signal-ring ring3"></div>
+                </div>
+
+                <div class="aura-status">
+                    <span class="status-dot"></span>
+                    AURA Active
+                </div>
+            </div>
+
+            <div class="aura-content">
+                <h1 class="aura-title">Meet AURA</h1>
+
+                <p class="aura-tagline">
+                    An adaptive AIoT assistant that understands your environment 
+                    and responds intelligently to your daily activities.
+                </p>
+
+                <div class="aura-capabilities">
+                    <span class="capability active">Environment Awareness</span>
+                    <span class="capability">Behavior Understanding</span>
+                    <span class="capability">Context Intelligence</span>
+                    <span class="capability">Smart Adaptation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="aura-problem-side">
+        <div class="aura-panel">
+            <div class="problem-card">
+                <h2>Why AURA Exists</h2>
+                <p class="problem-intro">
+                    I started this project after noticing how passive most rooms are. 
+                    They only respond when we manually change something, even though our environment 
+                    constantly affects how we work, rest, and focus. There is very little awareness of 
+                    what is happening in the space or what the user actually needs in the moment.
+                </p>
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <div>
+                            <h4>Passive Living Spaces</h4>
+                            <p>Most environments stay static even as user activities and needs change.</p>
+                        </div>
+                    </div>
+                    <div class="problem-item">
+                        <div>
+                            <h4>Limited Environmental Awareness</h4>
+                            <p>Typical rooms do not interpret light levels, sound, motion, or posture.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-item">
+                        <div>
+                            <h4>Manual Adjustment Everywhere</h4>
+                            <p>Users are responsible for constantly managing lighting, comfort, and conditions.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-item">
+                        <div>
+                            <h4>Impact on Productivity and Health</h4>
+                            <p>Small environmental factors influence focus, ergonomics, and overall well-being.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem-impact">
+                    AURA was built to explore how a space can understand its user and respond automatically, 
+                    turning a passive room into an adaptive environment that supports focus, comfort, and daily activity.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="aura-capabilities-section" data-aos="zoom-in-up">
+    <div class="capabilities-split">
+        <div class="capabilities-left">
+            <h2>System Capabilities</h2>
+            <p>
+                AURA continuously senses, interprets, and responds to environmental
+                and behavioral signals to create an adaptive living experience.
+            </p>
+        </div>
+
+        <div class="capabilities-stage">
+            <div class="capabilities-grid">
+                <div class="feature-card" data-feature="activity">
+                    <button class="card-minimize">−</button>
+
+                    <div class="feature-header">
+                        <h3>Activity Recognition</h3>
+                    </div>
+
+                    <p class="feature-preview">
+                        Understands what you are doing by observing posture, motion, and movement patterns.
+                    </p>
+
+                    <div class="feature-details">
+                        <p class="feature-description">
+                            AURA interprets physical behavior to understand user intent. Instead of relying on manual input, 
+                            the system detects patterns in movement and posture to determine whether the user is studying, 
+                            resting, or inactive.
+                        </p>
+
+                        <div class="feature-section">
+                            <h4>What it monitors</h4>
+                            <ul>
+                                <li>Posture changes at desk or bed</li>
+                                <li>Movement frequency and intensity</li>
+                                <li>Presence and absence in the room</li>
+                                <li>Daily behavior patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-section">
+                            <h4>Why it matters</h4>
+                            <p>
+                                The system can reduce distractions while studying, suggest breaks during long sessions,
+                                and support healthier routines.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-feature="environment">
+                    <button class="card-minimize">−</button>
+
+                    <div class="feature-header">
+                        <h3>Environment Monitoring</h3>
+                    </div>
+
+                    <p class="feature-preview">
+                        Tracks lighting, sound, and ambient activity in real time.
+                    </p>
+
+                    <div class="feature-details">
+
+                        <p class="feature-description">
+                            AURA continuously measures environmental conditions to understand how the room affects focus, 
+                            comfort, and rest. Sensor data provides the foundation for intelligent adjustments.
+                        </p>
+
+                        <div class="sensor-bars">
+                            <div class="sensor">
+                                <span>Brightness</span>
+                                <div class="bar"><div class="fill"></div></div>
+                            </div>
+
+                            <div class="sensor">
+                                <span>Sound</span>
+                                <div class="bar"><div class="fill"></div></div>
+                            </div>
+
+                            <div class="sensor">
+                                <span>Motion</span>
+                                <div class="bar"><div class="fill"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="feature-section">
+                            <h4>System inputs</h4>
+                            <ul>
+                                <li>Light intensity levels</li>
+                                <li>Ambient noise detection</li>
+                                <li>Environmental state changes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-feature="adaptation">
+                    <button class="card-minimize">−</button>
+
+                    <div class="feature-header">
+                        <h3>Smart Adaptation</h3>
+                    </div>
+
+                    <p class="feature-preview">
+                        Responds automatically to context and user behavior.
+                    </p>
+
+                    <div class="feature-details">
+                        <p class="feature-description">
+                            Based on detected activity and environmental conditions, AURA adjusts the room to support the 
+                            current situation. The system reacts in real time and learns from repeated patterns.
+                        </p>
+
+                        <div class="feature-section">
+                            <h4>Automatic responses</h4>
+                            <ul>
+                                <li>Lighting adjustments for focus or relaxation</li>
+                                <li>Comfort optimization based on activity</li>
+                                <li>Context aware system behavior</li>
+                                <li>Personalized environmental control</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-section">
+                            <h4>User impact</h4>
+                            <p>
+                                The environment adapts without constant user input, helping maintain focus, reduce fatigue,
+                                and improve comfort during daily routines.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-feature="analytics">
+                    <button class="card-minimize">−</button>
+
+                    <div class="feature-header">
+                        <h3>Behavior Analytics</h3>
+                    </div>
+
+                    <p class="feature-preview">
+                        Learns habits and reveals patterns over time.
+                    </p>
+
+                    <div class="feature-details">
+
+                        <p class="feature-description">
+                            AURA stores interaction data to identify trends in activity, environment usage, and behavior.
+                            These insights help refine system responses and show how routines evolve.
+                        </p>
+
+                        <div class="trend-chart">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <p class="trend-label">Daily activity trend</p>
+
+                        <div class="feature-section">
+                            <h4>Insights provided</h4>
+                            <ul>
+                                <li>Time spent studying or resting</li>
+                                <li>Consistency of daily routines</li>
+                                <li>Environmental conditions over time</li>
+                                <li>Behavior trend summaries</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5 bg-light py-5 rounded shadow-sm" data-aos="zoom-in-up">
+    <div class="container">
+        <h1 class="section-title">Engineering Implementation</h1>
+    </div>
+    <div class="container eng-deck-wrapper">
+        <div class="eng-deck loading">
+            <div class="eng-card" data-step="1">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">System Overview</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                AURA is designed as an end-to-end intelligent system that connects the physical environment 
+                                with adaptive digital intelligence. At its core, it bridges real-world sensor data with 
+                                decision-making algorithms to create a system that not only reacts, but learns over time.
+                            </p>
+
+                            <p class="eng-description">
+                                The device continuously observes its surroundings through embedded sensors, capturing signals 
+                                such as light, sound, and motion. These signals are processed into meaningful representations 
+                                of user behavior and environmental context, allowing the system to understand what is happening 
+                                in the room without requiring explicit input.
+                            </p>
+
+                            <p class="eng-description">
+                                Behind the scenes, AURA integrates embedded firmware, a backend processing layer, and a machine 
+                                learning pipeline. Together, these components form a continuous feedback loop where data is 
+                                collected, interpreted, and used to improve future responses.
+                            </p>
+
+                            <p class="eng-description">
+                                Instead of functioning as a static smart device, AURA operates as a living system, one that 
+                                evolves with usage, adapts to patterns, and becomes more aligned with the user’s habits over time.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel1">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/AURA/cad1.png" class="carousel-img active" alt="CAD model front view" data-caption="Initial CAD model exploring the overall form factor and front-facing interface layout">
+                                    <img src="../images/AURA/cad2.png" class="carousel-img" alt="CAD model internal layout" data-caption="Internal component arrangement showing spatial planning for electronics, sensors, and structural support">
+                                    <img src="../images/AURA/cad3.png" class="carousel-img" alt="CAD model detailed assembly" data-caption="Refined assembly highlighting mounting features, tolerances, and manufacturability considerations">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel1">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel1">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Initial CAD model exploring the overall form factor and front-facing interface layout
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eng-card" data-step="2">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">System Architecture</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                The system is composed of three primary layers working together 
+                                to enable intelligent behavior.
+                            </p>
+                            <div class="architecture-container">
+                                <div class="architecture-circle">
+                                    <div class="circle-core"></div>
+
+                                    <div class="arch-node node-device" data-node="device">
+                                        <span>ESP32</span>
+                                    </div>
+
+                                    <div class="arch-node node-backend" data-node="backend">
+                                        <span>Backend</span>
+                                    </div>
+
+                                    <div class="arch-node node-model" data-node="model">
+                                        <span>ML Model</span>
+                                    </div>
+
+                                    <svg class="circle-flow" viewBox="0 0 400 400">
+                                        <circle cx="200" cy="200" r="150" class="flow-ring"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="architecture-info">
+                                    <div class="info-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eng-card" data-step="3">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">Embedded System</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                The embedded system serves as the foundation of AURA, acting as the real-time interface between 
+                                the physical environment and the intelligent backend. Built on the ESP32, it is responsible for 
+                                continuously sensing, processing, and responding to environmental changes.
+                            </p>
+
+                            <p class="eng-description">
+                                Rather than simply collecting raw data, the firmware performs lightweight processing and decision 
+                                logic directly on the device. This enables immediate responsiveness while minimizing latency and 
+                                reducing reliance on constant cloud communication.
+                            </p>
+
+                            <ul class="eng-list">
+                                <li>Continuous acquisition of environmental signals (light, sound, motion)</li>
+                                <li>Local preprocessing and filtering of sensor data</li>
+                                <li>Device state management and behavior control</li>
+                                <li>Wireless communication with backend services</li>
+                                <li>Real-time user feedback through display and interaction modules</li>
+                            </ul>
+
+                            <p class="eng-description">
+                                By combining sensing, local intelligence, and connectivity, the embedded system allows AURA to 
+                                operate reliably in real time while remaining tightly integrated with higher-level learning 
+                                and adaptation processes.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel2">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/AURA/render.png" class="carousel-img active" alt="High quality render of device" data-caption="High-fidelity render of the final design vision, capturing materials, lighting, and intended user experience">
+                                    <img src="../images/AURA/prototype.jpg" class="carousel-img" alt="Physical prototype device" data-caption="First working prototype integrating electronics, enclosure, and interaction system into a functional unit">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel2">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel2">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    High-fidelity render of the final design vision, capturing materials, lighting, and intended user experience
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eng-card" data-step="4">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">Backend Infrastructure</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                The backend infrastructure acts as the intelligence layer of AURA, where raw device data is 
+                                transformed into meaningful insights and predictive capabilities. It manages the full lifecycle 
+                                of data — from collection and storage to model training and deployment.
+                            </p>
+
+                            <p class="eng-description">
+                                This layer enables the system to move beyond simple rule-based behavior by learning patterns 
+                                from historical data. It provides the computational resources needed to train models, evaluate 
+                                performance, and serve predictions back to the device in real time.
+                            </p>
+
+                            <ul class="eng-list">
+                                <li>Centralized dataset storage and management</li>
+                                <li>Automated training and retraining pipelines</li>
+                                <li>Flask-based REST API for communication</li>
+                                <li>Scalable inference endpoints</li>
+                                <li>Experiment tracking and model versioning</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="ml-stage serpentine-container">
+                                <div class="serp-row serp-row-1">
+                                    <div class="serp-step">
+                                        <h4>Sensor Signals</h4>
+                                        <p>Brightness<br>Sound<br>Motion</p>
+                                    </div>
+
+                                    <div class="serp-step">
+                                        <h4>Data Windows</h4>
+                                        <p>Time-series feature vectors</p>
+                                    </div>
+                                </div>
+
+                                <div class="serp-row serp-row-2">
+                                    <div class="serp-step">
+                                        <h4>Activity Prediction</h4>
+                                        <p>User state classification</p>
+                                    </div>
+
+                                    <div class="serp-step">
+                                        <h4>ML Model</h4>
+                                        <p>Multilayer Perceptron</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eng-card" data-step="5">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">Machine Learning Model</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                The machine learning component of AURA is responsible for interpreting sensor data and 
+                                translating it into meaningful predictions about user activity and environmental context. 
+                                It enables the system to move from reactive behavior to intelligent decision-making.
+                            </p>
+
+                            <ul class="eng-list">
+                                <li>Feature extraction from multi-sensor time-series data</li>
+                                <li>Supervised learning pipeline for activity classification</li>
+                                <li>Model evaluation, validation, and hyperparameter tuning</li>
+                                <li>Real-time inference for adaptive system response</li>
+                            </ul>
+
+                            <p class="eng-description">
+                                Sensor data is continuously collected and segmented into structured time-series windows, 
+                                each representing short intervals of user activity. These segments are transformed into 
+                                feature vectors that capture patterns in motion, sound, and brightness.
+                            </p>
+
+                            <p class="eng-description">
+                                A neural network model is trained on this data to learn the relationship between sensor 
+                                patterns and user states such as studying, resting, or being inactive. Through iterative 
+                                training and evaluation, the model improves its ability to generalize across different 
+                                conditions and behaviors.
+                            </p>
+
+                            <p class="eng-description">
+                                During live operation, incoming sensor data is sent to the backend where the trained model 
+                                performs inference. The resulting predictions allow AURA to adapt its behavior dynamically, 
+                                aligning environmental conditions with the user’s current activity.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel3">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/AURA/label_distribution.png"
+                                    class="carousel-img active"
+                                    alt="Label Distribution"
+                                    data-caption="Distribution of labeled user activity states used for training the model">
+
+                                    <img src="../images/AURA/histogram.png"
+                                    class="carousel-img"
+                                    alt="Sensor Feature Histogram"
+                                    data-caption="Histogram showing the distribution of key sensor features collected from the environment">
+
+                                    <img src="../images/AURA/sample0_timeseries.png"
+                                    class="carousel-img"
+                                    alt="Sensor Time Series Example 1"
+                                    data-caption="Example time-series window showing brightness, sound, and motion signals for one activity sample">
+
+                                    <img src="../images/AURA/sample100_timeseries.png"
+                                    class="carousel-img"
+                                    alt="Sensor Time Series Example 2"
+                                    data-caption="Another sensor time-series sample demonstrating temporal signal patterns used for feature extraction">
+
+                                    <img src="../images/AURA/correlation.png"
+                                    class="carousel-img"
+                                    alt="Feature Correlation Matrix"
+                                    data-caption="Correlation analysis between extracted sensor features to understand relationships in the dataset">
+
+                                    <img src="../images/AURA/training_loss.png"
+                                    class="carousel-img"
+                                    alt="Training Loss Curve"
+                                    data-caption="Training loss curve showing convergence behavior of the neural network during optimization">
+
+                                    <img src="../images/AURA/loss.png"
+                                    class="carousel-img"
+                                    alt="Validation Loss"
+                                    data-caption="Validation loss monitoring model generalization during training">
+
+                                    <img src="../images/AURA/accuracy_bar.png"
+                                    class="carousel-img"
+                                    alt="Model Accuracy"
+                                    data-caption="Model accuracy comparison across predicted user activity classes">
+
+                                    <img src="../images/AURA/confusion_matrix.png"
+                                    class="carousel-img"
+                                    alt="Confusion Matrix"
+                                    data-caption="Confusion matrix evaluating classification performance of the trained neural network">
+
+                                    <img src="../images/AURA/weight_heatmap.png"
+                                    class="carousel-img"
+                                    alt="Neural Network Weight Heatmap"
+                                    data-caption="Heatmap visualization of learned neural network weights highlighting important feature connections">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel3">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel3">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    Distribution of labeled user activity states used for training the model
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eng-card" data-step="6">
+                <div class="eng-card-inner">
+                    <div class="row align-items-center">
+                        <h2 class="eng-title">System Integration</h2>
+                        <div class="col-md-6">
+                            <p class="eng-description">
+                                AURA operates as a fully integrated AIoT system where hardware, software, and machine learning 
+                                components work together in a continuous feedback loop. Each part of the system contributes to 
+                                a cycle of sensing, learning, and adaptation.
+                            </p>
+
+                            <p class="eng-description">
+                                The process begins at the device level, where environmental and behavioral data is captured in 
+                                real time. This data is transmitted to the backend, where it is stored, processed, and used to 
+                                train and refine machine learning models.
+                            </p>
+
+                            <p class="eng-description">
+                                Once trained, these models are deployed to serve real-time predictions, enabling the system to 
+                                interpret current conditions and determine appropriate responses. These predictions are then 
+                                sent back to the device, influencing how it adjusts the environment.
+                            </p>
+
+                            <p class="eng-description">
+                                Over time, this loop allows AURA to continuously improve. As more data is collected, the system 
+                                becomes better at recognizing patterns, adapting to user preferences, and responding more 
+                                intelligently to changing conditions.
+                            </p>
+
+                            <p class="eng-description">
+                                This tight integration between sensing, learning, and action transforms AURA from a simple 
+                                smart device into an adaptive system that evolves alongside its user.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="carousel" data-id="carousel4">
+                                <div class="carousel-container rounded shadow aspect-1-1">
+                                    <img src="../images/AURA/prototype_buttons.png" class="carousel-img active" alt="User pressing control buttons" data-caption="User interacting with the tactile button interface to navigate and control system functions">
+                                    <img src="../images/AURA/prototype_dim.png" class="carousel-img" alt="Light sensors dimming LEDs" data-caption="Demonstration of adaptive lighting where ambient light sensing dynamically reduces LED brightness">
+                                    <img src="../images/AURA/prototype_interact.png" class="carousel-img" alt="User navigating system menu" data-caption="Real-time interaction with the onboard menu system using physical inputs for intuitive control">
+                                    <img src="../images/AURA/prototype_lit.png" class="carousel-img" alt="Fully illuminated LED output" data-caption="System operating at full brightness prior to environmental input, showcasing baseline illumination behavior">
+                                    <img src="../images/AURA/prototype_screen.png" class="carousel-img" alt="Close up of LED display screen" data-caption="Close-up of the display interface presenting system states and navigation feedback to the user">
+
+                                    <button class="carousel-btn prev-btn" data-target="carousel4">&#10094;</button>
+                                    <button class="carousel-btn next-btn" data-target="carousel4">&#10095;</button>
+                                </div>
+                                <p class="carousel-subcaption text-muted mt-2 small text-center" aria-live="polite">
+                                    User interacting with the tactile button interface to navigate and control system functions
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="eng-controls">
+            <button class="eng-prev-btn">Prev</button>
+
+            <div class="eng-indicators-wrapper">
+                <span class="indicator-label">Section</span>
+                <div class="eng-indicators">
+                    <span data-step="1" class="active">1</span>
+                    <span data-step="2">2</span>
+                    <span data-step="3">3</span>
+                    <span data-step="4">4</span>
+                    <span data-step="5">5</span>
+                    <span data-step="6">6</span>
+                </div>
+            </div>
+
+            <button class="eng-next-btn">Next</button>
+        </div>
+    </div>
+</section>
